@@ -14,23 +14,16 @@ class SpellCasting(Enum):
     WARLOCK_CASTER = 4
 
 
-def get_spell_casting_ability(class_name: Class, subclasses: Dict[Class, Subclass]) -> SpellCasting:
-    if (
-        class_name == Class.BARD
-        or class_name == Class.CLERIC
-        or class_name == Class.DRUID
-        or class_name == Class.SORCERER
-        or class_name == Class.WIZARD
-    ):
-        return SpellCasting.FULL_CASTER
+def is_full_caster(class_name: Class) -> bool:
+    return class_name in (Class.BARD, Class.CLERIC, Class.DRUID, Class.SORCERER, Class.WIZARD)
 
-    if class_name == Class.PALADIN or class_name == Class.RANGER:
-        return SpellCasting.HALF_CASTER
 
-    if class_name == Class.WARLOCK:
-        return SpellCasting.WARLOCK_CASTER
+def is_half_caster(class_name: Class) -> bool:
+    return class_name in (Class.PALADIN, Class.RANGER)
 
-    if (
+
+def is_semi_caster(class_name: Class, subclasses: Dict[Class, Subclass]):
+    return (
         class_name == Class.FIGHTER
         and Class.FIGHTER in subclasses
         and subclasses[Class.FIGHTER] == eldricht_knight
@@ -38,7 +31,20 @@ def get_spell_casting_ability(class_name: Class, subclasses: Dict[Class, Subclas
         class_name == Class.ROGUE
         and Class.ROGUE in subclasses
         and subclasses[Class.ROGUE] == arcane_trickster
-    ):
+    )
+
+
+def get_spell_casting_ability(class_name: Class, subclasses: Dict[Class, Subclass]) -> SpellCasting:
+    if is_full_caster(class_name):
+        return SpellCasting.FULL_CASTER
+
+    if is_half_caster(class_name):
+        return SpellCasting.HALF_CASTER
+
+    if class_name == Class.WARLOCK:
+        return SpellCasting.WARLOCK_CASTER
+
+    if is_semi_caster(class_name, subclasses):
         return SpellCasting.SEMI_CASTER
 
     return SpellCasting.NONE
