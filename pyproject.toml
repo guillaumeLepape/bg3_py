@@ -1,0 +1,12 @@
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "INP"]
+
+[tool.pytest.ini_options]
+log_file = "bg3_test.log"
+log_file_level = "INFO"
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
