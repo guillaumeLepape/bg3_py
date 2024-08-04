@@ -1,6 +1,10 @@
+import logging
+from pathlib import Path
 from uuid import UUID
 
 from pydantic import BaseModel, computed_field
+
+logger = logging.getLogger(__file__)
 
 
 class Spell(BaseModel):
@@ -12,6 +16,11 @@ class Spell(BaseModel):
     @computed_field
     def icon(self) -> str:
         return f"/static/cantrips/{self.name.lower().replace(' ', '_')}.jpg"
+
+    def check_icon(self) -> bool:
+        path = self.icon.removeprefix("/")
+
+        return (Path(__file__).parents[1] / path).is_file()
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Spell):
@@ -67,3 +76,8 @@ bard_level_1_spells = [
     tasha_hideous_laughter,
     thunderwave,
 ]
+
+
+for var in dict(locals()).values():
+    if isinstance(var, Spell) and var.check_icon() is False:
+        logger.warning(f"Icon not found for spell: {var.name}")

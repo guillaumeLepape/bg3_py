@@ -6,6 +6,7 @@ else:
     from typing_extensions import Annotated
 
 import json
+import logging
 from typing import Any, Awaitable, Callable, Dict, List, Optional
 from uuid import UUID
 
@@ -88,6 +89,12 @@ from .weapon import (
     sickle_proficiency,
     simple_weapon_proficiencies,
     spear_proficiency,
+)
+
+logging.basicConfig(
+    filename="bg3_py.log",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
 

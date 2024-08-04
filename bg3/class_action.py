@@ -1,9 +1,13 @@
+from logging import getLogger
+from pathlib import Path
 from typing import List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, computed_field
 
 from .cost import Cost, action, bonus_action, channel_divinity_charge
+
+logger = getLogger(__file__)
 
 
 class ClassAction(BaseModel):
@@ -15,6 +19,17 @@ class ClassAction(BaseModel):
     @computed_field
     def icon(self) -> str:
         return f"/static/class_actions/{self.name.replace(' ', '_')}.webp"
+
+    def check_icon(self) -> bool:
+        path = self.icon.removeprefix("/")
+
+        return (Path(__file__).parents[1] / path).is_file()
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, ClassAction):
+            raise NotImplementedError
+
+        return self.id == other.id
 
 
 second_wind = ClassAction(
@@ -64,3 +79,8 @@ guided_strike = ClassAction(
     name="Guided Strike",
     cost=[action, channel_divinity_charge],
 )
+
+
+for var in dict(locals()).values():
+    if isinstance(var, ClassAction) and var.check_icon() is False:
+        logger.warning(f"Icon not found for class action: {var.name}")
