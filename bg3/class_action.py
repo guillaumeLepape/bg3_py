@@ -1,4 +1,4 @@
-from logging import getLogger
+import logging
 from pathlib import Path
 from typing import List, Optional
 from uuid import UUID
@@ -7,7 +7,7 @@ from pydantic import BaseModel, computed_field
 
 from .cost import Cost, action, bonus_action, channel_divinity_charge
 
-logger = getLogger(__file__)
+logger = logging.getLogger(__file__)
 
 
 class ClassAction(BaseModel):
@@ -21,7 +21,7 @@ class ClassAction(BaseModel):
         return f"/static/class_actions/{self.name.replace(' ', '_')}.webp"
 
     def check_icon(self) -> bool:
-        path = self.icon.removeprefix("/")
+        path = self.icon().removeprefix("/")
 
         return (Path(__file__).parents[1] / path).is_file()
 

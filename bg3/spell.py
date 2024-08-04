@@ -18,7 +18,7 @@ class Spell(BaseModel):
         return f"/static/cantrips/{self.name.lower().replace(' ', '_')}.jpg"
 
     def check_icon(self) -> bool:
-        path = self.icon.removeprefix("/")
+        path = self.icon().removeprefix("/")
 
         return (Path(__file__).parents[1] / path).is_file()
 

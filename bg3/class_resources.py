@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class ClassResources(BaseModel):
@@ -38,3 +38,5 @@ class ClassResources(BaseModel):
                 else None
             ),
         )
+
+    model_config = ConfigDict(extra="forbid")

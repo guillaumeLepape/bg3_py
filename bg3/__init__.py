@@ -208,6 +208,8 @@ def classes(
     if feat is True:
         result.feat = True
 
+    print(level)
+
     if class_name == Class.BARBARIAN:
         if level == 0:
             result.proficiencies = Proficiencies(
@@ -257,7 +259,7 @@ def classes(
                 saving_throws=[Ability.DEXTERITY, Ability.CHARISMA],
             )
         elif level == 1:
-            result.class_resources = ClassResources(bardic_inspiration=3)
+            result.class_resources = ClassResources(bardic_inspirations=3)
             result.choices = Choices(
                 cantrips=CantripChoice(number=2, cantrips=bard_cantrips),
                 spells=SpellChoice(number=4, spells=bard_level_1_spells),
