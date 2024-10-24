@@ -3,6 +3,15 @@ from typing import Callable, Dict, List, Tuple, Union
 from pydantic import BaseModel, ConfigDict
 
 from .classes import Class, SubClass
+from .fighting_style import (
+    ARCHERY,
+    DEFENCE,
+    DUELLING,
+    GREAT_WEAPON_FIGHTING,
+    PROTECTION,
+    TWO_WEAPON_FIGHTING,
+    FightingStyle,
+)
 from .spell_new import SchoolOfMagic, Spell
 
 
@@ -65,6 +74,21 @@ def enchantment_or_illusion_criteria(level: int) -> Callable[[Spell], bool]:
             school_of_magic_criteria(SchoolOfMagic.ILLUSION),
         ),
     )
+
+
+def is_magical_secret(spell: Spell) -> bool:
+    for class_level in spell.how_to_learn.classes:
+        if class_level.name == Class.BARD and class_level.via == "magical_secrets":
+            return True
+
+    for subclass_level in spell.how_to_learn.subclasses:
+        if (
+            subclass_level.name == SubClass.COLLEGE_OF_LORE
+            and subclass_level.via == "magical_secrets"
+        ):
+            return True
+
+    return False
 
 
 LevellingSpell = Tuple[
@@ -237,5 +261,76 @@ SPELLS_KNOWN_AT_LEVELS: Dict[Union[Class, SubClass], LevellingSpell] = {
         [SpellToChoose(criteria=max_level_criteria(5), amount=2), CantripToChoose(amount=1)],
         [SpellToChoose(criteria=max_level_criteria(6), amount=2)],
         [SpellToChoose(criteria=max_level_criteria(6), amount=2)],
+    ),
+}
+
+MAGICAL_SECRETS_KNOWN_AT_LEVELS: Dict[Union[Class, SubClass], LevellingSpell] = {
+    Class.BARD: (
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [SpellToChoose(criteria=and_(max_level_criteria(5), is_magical_secret), amount=2)],
+        [],
+        [],
+    ),
+    SubClass.COLLEGE_OF_LORE: (
+        [],
+        [],
+        [],
+        [],
+        [],
+        [SpellToChoose(criteria=and_(max_level_criteria(3), is_magical_secret), amount=2)],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+    ),
+}
+
+
+class FightingStyleToChoose(BaseModel):
+    level: int
+    choices: List[FightingStyle]
+
+
+FIGHTING_STYLE_KNOWN_AT_LEVELS: Dict[Union[Class, SubClass], FightingStyleToChoose] = {
+    SubClass.COLLEGE_OF_SWORDS: FightingStyleToChoose(
+        level=3, choices=[DUELLING, TWO_WEAPON_FIGHTING]
+    ),
+    Class.FIGHTER: FightingStyleToChoose(
+        level=1,
+        choices=[
+            ARCHERY,
+            DEFENCE,
+            DUELLING,
+            GREAT_WEAPON_FIGHTING,
+            PROTECTION,
+            TWO_WEAPON_FIGHTING,
+        ],
+    ),
+    SubClass.CHAMPION: FightingStyleToChoose(
+        level=10,
+        choices=[
+            ARCHERY,
+            DEFENCE,
+            DUELLING,
+            GREAT_WEAPON_FIGHTING,
+            PROTECTION,
+            TWO_WEAPON_FIGHTING,
+        ],
+    ),
+    Class.PALADIN: FightingStyleToChoose(
+        level=2, choices=[DEFENCE, DUELLING, GREAT_WEAPON_FIGHTING, PROTECTION]
+    ),
+    Class.RANGER: FightingStyleToChoose(
+        level=2, choices=[ARCHERY, DEFENCE, DUELLING, TWO_WEAPON_FIGHTING]
     ),
 }

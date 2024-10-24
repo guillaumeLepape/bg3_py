@@ -23,7 +23,7 @@ from .cantrip import (
 from .class_action import ClassAction
 from .class_resources import ClassResources
 from .feature import Feature
-from .fighting_style import FightingStyle, duelling, two_weapon_fighting
+from .fighting_style import DUELLING, TWO_WEAPON_FIGHTING, FightingStyle
 from .proficiency import Proficiencies
 from .spell import Spell
 from .weapon import martial_weapon_proficiencies, scimitar_proficiency
@@ -86,7 +86,7 @@ college_of_valour = Subclass(
 college_of_swords = Subclass(
     id="ebfbf46b-d0eb-42dc-8328-e6eb9bc4e6f8",
     name="College of Swords",
-    fighting_style=[duelling, two_weapon_fighting],
+    fighting_style=[DUELLING, TWO_WEAPON_FIGHTING],
     proficiencies=Proficiencies(
         armours=[medium_armour_proficiency], weapons=[scimitar_proficiency]
     ),
