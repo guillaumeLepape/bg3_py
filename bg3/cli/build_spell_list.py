@@ -242,7 +242,7 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
                     via = parse_via(subclass_name, raw_via)
 
                     subclasses.append(
-                        SubclassLevel.create(
+                        SubclassLevel(
                             name=subclass_name,
                             level=level,
                             via=via,
@@ -251,13 +251,7 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
             else:
                 via = parse_via(class_name, raw_via)
 
-                classes.append(
-                    ClassLevel.create(
-                        name=class_name,
-                        level=level,
-                        via=via,
-                    )
-                )
+                classes.append(ClassLevel(name=class_name, level=level, via=via))
 
         return classes, subclasses
 
@@ -278,23 +272,11 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
             else:
                 via = parse_via(subclass_name, raw_via)
 
-                return [], [
-                    SubclassLevel.create(
-                        name=subclass_name,
-                        level=level,
-                        via=via,
-                    )
-                ]
+                return [], [SubclassLevel(name=subclass_name, level=level, via=via)]
         else:
             via = parse_via(class_name, raw_via)
 
-            return [
-                ClassLevel.create(
-                    name=class_name,
-                    level=level,
-                    via=via,
-                )
-            ], []
+            return [ClassLevel(name=class_name, level=level, via=via)], []
 
     raise ValueError(f"Couldn't parse: {raw_class_level}")
 
@@ -510,7 +492,7 @@ async def main() -> int:
     print(f"Number of spells found: {len(spells)}")
 
     (Path(__file__).parent / "spells.json").write_text(
-        spells.model_dump_json(indent=4, exclude_none=True)
+        spells.model_dump_json(indent=4, exclude_none=True) + "\n",
     )
 
     return 0

@@ -45,10 +45,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -115,10 +117,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -192,10 +196,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -241,7 +247,7 @@
                     "name": "Druid",
                     "level": 5,
                     "via": {
-                        "wild_shape": "Deep Roth\u00e9"
+                        "wild_shape": "Deep Rothé"
                     }
                 }
             ],
@@ -259,20 +265,24 @@
             ],
             "races": [
                 {
+                    "id": "70ec2cd4-508e-4db7-8f83-8e2043ab1af3",
                     "name": "Drow",
                     "level": 1
                 }
             ],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 },
                 {
+                    "id": "05a2d091-4f8e-4af2-a21a-29be841473cd",
                     "name": "Drow Half-Elf",
                     "level": 1
                 }
@@ -379,10 +389,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -444,10 +456,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -552,10 +566,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -616,20 +632,24 @@
             ],
             "races": [
                 {
+                    "id": "851dd22e-a1bc-46b5-9890-72402d10cf1c",
                     "name": "Githyanki",
                     "level": 1
                 }
             ],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 },
                 {
+                    "id": "f52a31a1-36bc-4197-8aac-683cd5f4fcc0",
                     "name": "Mephistopheles Tiefling",
                     "level": 1
                 }
@@ -696,10 +716,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -772,10 +794,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -816,6 +840,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "2b37ebaf-9a16-477f-934c-798ec8fc02d8",
                     "name": "Asmodeus Tiefling",
                     "level": 1
                 }
@@ -879,10 +904,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -1063,10 +1090,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -1102,6 +1131,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "984ef62d-1035-473b-acd3-516ad63db530",
                     "name": "Zariel Tiefling",
                     "level": 1
                 }
@@ -1207,10 +1237,12 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ce963b4a-2855-45bd-8ec2-9b74cb30983d",
                     "name": "High Elf",
                     "level": 1
                 },
                 {
+                    "id": "034abf20-3295-4e6e-ab03-de196e96a36a",
                     "name": "High Half-Elf",
                     "level": 1
                 }
@@ -1449,7 +1481,7 @@
     },
     {
         "name": "Bless",
-        "short_description": "Bless is a level 1 enchantment spell. This spell allows spellcasters to temporarily bolster themselves and their allies\u2019 attacks and Saving Throws.",
+        "short_description": "Bless is a level 1 enchantment spell. This spell allows spellcasters to temporarily bolster themselves and their allies’ attacks and Saving Throws.",
         "long_description": "",
         "school": "Enchantment",
         "level": 1,
@@ -1574,6 +1606,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "f52a31a1-36bc-4197-8aac-683cd5f4fcc0",
                     "name": "Mephistopheles Tiefling",
                     "level": 3
                 }
@@ -1975,7 +2008,7 @@
     },
     {
         "name": "Disguise Self",
-        "short_description": "Disguise Self is a level 1 illusion spell. This spell allows spellcasters to temporarily change their appearance. While active, gain access to the action \u00a0Dispel Disguise to end the effect.",
+        "short_description": "Disguise Self is a level 1 illusion spell. This spell allows spellcasters to temporarily change their appearance. While active, gain access to the action  Dispel Disguise to end the effect.",
         "long_description": "",
         "school": "Illusion",
         "level": 1,
@@ -2189,6 +2222,7 @@
             ],
             "races": [
                 {
+                    "id": "851dd22e-a1bc-46b5-9890-72402d10cf1c",
                     "name": "Githyanki",
                     "level": 3
                 }
@@ -2246,7 +2280,7 @@
     },
     {
         "name": "Entangle",
-        "short_description": "Entangle is a level 1 conjuration spell. This spell allows spellcasters to conjure magical vines and turn an area within range into difficult terrain. Creatures are possibly \u00a0Entangled and move at half speed while standing in this area.",
+        "short_description": "Entangle is a level 1 conjuration spell. This spell allows spellcasters to conjure magical vines and turn an area within range into difficult terrain. Creatures are possibly  Entangled and move at half speed while standing in this area.",
         "long_description": "",
         "school": "Conjuration",
         "level": 1,
@@ -2351,7 +2385,7 @@
     },
     {
         "name": "Faerie Fire",
-        "short_description": "Faerie Fire is a level 1 evocation spell. This spell allows spellcasters to conjure brilliant light. Any creature caught in the radius temporarily sheds faint light and prevents \u00a0Invisible.",
+        "short_description": "Faerie Fire is a level 1 evocation spell. This spell allows spellcasters to conjure brilliant light. Any creature caught in the radius temporarily sheds faint light and prevents  Invisible.",
         "long_description": "",
         "school": "Evocation",
         "level": 1,
@@ -2399,12 +2433,14 @@
             ],
             "races": [
                 {
+                    "id": "70ec2cd4-508e-4db7-8f83-8e2043ab1af3",
                     "name": "Drow",
                     "level": 3
                 }
             ],
             "subraces": [
                 {
+                    "id": "05a2d091-4f8e-4af2-a21a-29be841473cd",
                     "name": "Drow Half-Elf",
                     "level": 3
                 }
@@ -2954,6 +2990,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "2b37ebaf-9a16-477f-934c-798ec8fc02d8",
                     "name": "Asmodeus Tiefling",
                     "level": 3
                 }
@@ -2962,7 +2999,7 @@
     },
     {
         "name": "Heroism",
-        "short_description": "Heroism is a level 1 enchantment spell. This spell allows spellcasters to instill themselves or an ally with courage. The affected creature cannot be \u00a0Frightened and gains Temporary Hit Points.",
+        "short_description": "Heroism is a level 1 enchantment spell. This spell allows spellcasters to instill themselves or an ally with courage. The affected creature cannot be  Frightened and gains Temporary Hit Points.",
         "long_description": "",
         "school": "Enchantment",
         "level": 1,
@@ -3605,6 +3642,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "984ef62d-1035-473b-acd3-516ad63db530",
                     "name": "Zariel Tiefling",
                     "level": 3
                 }
@@ -3842,6 +3880,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "c5cd8a5b-6c19-4e74-8d33-50f8a8d18994",
                     "name": "Forest Gnome",
                     "level": 1
                 }
@@ -3850,7 +3889,7 @@
     },
     {
         "name": "Tasha's Hideous Laughter",
-        "short_description": "Tasha's Hideous Laughter is a level 1 enchantment spell. It allows spellcasters to send a targeted creature into a fit of laughter, falling \u00a0Prone.",
+        "short_description": "Tasha's Hideous Laughter is a level 1 enchantment spell. It allows spellcasters to send a targeted creature into a fit of laughter, falling  Prone.",
         "long_description": "",
         "school": "Enchantment",
         "level": 1,
@@ -3915,7 +3954,7 @@
     },
     {
         "name": "Thunderous Smite",
-        "short_description": "Thunderous Smite is a level 1 evocation spell. This spell allows spellcasters to cause their melee weapon to ring with Thunder as they strike, pushing targets away and potentially knocking them \u00a0Prone.",
+        "short_description": "Thunderous Smite is a level 1 evocation spell. This spell allows spellcasters to cause their melee weapon to ring with Thunder as they strike, pushing targets away and potentially knocking them  Prone.",
         "long_description": "",
         "school": "Evocation",
         "level": 1,
@@ -4106,7 +4145,7 @@
     },
     {
         "name": "Wrathful Smite",
-        "short_description": "Wrathful Smite is a level 1 evocation spell. This spell allows spellcasters to channel their wrath through their melee weapon, possibly \u00a0Frightening their target on hit.",
+        "short_description": "Wrathful Smite is a level 1 evocation spell. This spell allows spellcasters to channel their wrath through their melee weapon, possibly  Frightening their target on hit.",
         "long_description": "",
         "school": "Evocation",
         "level": 1,
@@ -4303,7 +4342,7 @@
     },
     {
         "name": "Blindness",
-        "short_description": "Blindness is a level 2 necromancy spell. This spell allows spellcasters to magically \u00a0Blind a targeted hostile creature.",
+        "short_description": "Blindness is a level 2 necromancy spell. This spell allows spellcasters to magically  Blind a targeted hostile creature.",
         "long_description": "",
         "school": "Necromancy",
         "level": 2,
@@ -4448,7 +4487,7 @@
     },
     {
         "name": "Branding Smite",
-        "short_description": "Branding Smite is a level 2 evocation spell. This spell allows spellcasters to cause their weapon to gleam with astral radiance, allow them to mark targets with light, preventing them from turning \u00a0Invisible",
+        "short_description": "Branding Smite is a level 2 evocation spell. This spell allows spellcasters to cause their weapon to gleam with astral radiance, allow them to mark targets with light, preventing them from turning  Invisible",
         "long_description": "",
         "school": "Evocation",
         "level": 2,
@@ -4486,6 +4525,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "984ef62d-1035-473b-acd3-516ad63db530",
                     "name": "Zariel Tiefling",
                     "level": 5
                 }
@@ -4668,7 +4708,7 @@
     },
     {
         "name": "Darkness",
-        "short_description": "Darkness is a level 2 evocation spell. This spell allows spellcasters to conjure a cloud of darkness in an area within range that obscures and inflicts \u00a0blind to those within it.",
+        "short_description": "Darkness is a level 2 evocation spell. This spell allows spellcasters to conjure a cloud of darkness in an area within range that obscures and inflicts  blind to those within it.",
         "long_description": "",
         "school": "Evocation",
         "level": 2,
@@ -4747,16 +4787,19 @@
             ],
             "races": [
                 {
+                    "id": "70ec2cd4-508e-4db7-8f83-8e2043ab1af3",
                     "name": "Drow",
                     "level": 5
                 }
             ],
             "subraces": [
                 {
+                    "id": "05a2d091-4f8e-4af2-a21a-29be841473cd",
                     "name": "Drow Half-Elf",
                     "level": 5
                 },
                 {
+                    "id": "2b37ebaf-9a16-477f-934c-798ec8fc02d8",
                     "name": "Asmodeus Tiefling",
                     "level": 5
                 }
@@ -5002,6 +5045,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "ef3a0707-a319-471c-aed4-a98ec69f5ff8",
                     "name": "Duergar",
                     "level": 3
                 }
@@ -5078,6 +5122,7 @@
             "races": [],
             "subraces": [
                 {
+                    "id": "f52a31a1-36bc-4197-8aac-683cd5f4fcc0",
                     "name": "Mephistopheles Tiefling",
                     "level": 5
                 }
@@ -5339,7 +5384,7 @@
     },
     {
         "name": "Invisibility",
-        "short_description": "Invisibility is a level 2 illusion spell. This spell allows spellcasters to turn themselves and other creatures \u00a0Invisible to the naked eye.",
+        "short_description": "Invisibility is a level 2 illusion spell. This spell allows spellcasters to turn themselves and other creatures  Invisible to the naked eye.",
         "long_description": "",
         "school": "Illusion",
         "level": 2,
@@ -5806,6 +5851,7 @@
             ],
             "races": [
                 {
+                    "id": "851dd22e-a1bc-46b5-9890-72402d10cf1c",
                     "name": "Githyanki",
                     "level": 5
                 }
@@ -6213,7 +6259,7 @@
     },
     {
         "name": "See Invisibility",
-        "short_description": "See Invisibility is a level 2 divination spell. This spell allows spellcasters to see \u00a0Invisible objects and creatures within range while not \u00a0Incapacitated. Creatures within range which fail on a Dexterity Saving Throw are revealed to others.",
+        "short_description": "See Invisibility is a level 2 divination spell. This spell allows spellcasters to see  Invisible objects and creatures within range while not  Incapacitated. Creatures within range which fail on a Dexterity Saving Throw are revealed to others.",
         "long_description": "",
         "school": "Divination",
         "level": 2,
@@ -7596,7 +7642,7 @@
     },
     {
         "name": "Haste",
-        "short_description": "Haste is a level 3 transmutation spell. This spell allows spellcasters to allow their allies to become \u00a0Hastened.",
+        "short_description": "Haste is a level 3 transmutation spell. This spell allows spellcasters to allow their allies to become  Hastened.",
         "long_description": "",
         "school": "Transmutation",
         "level": 3,
@@ -8442,7 +8488,7 @@
     },
     {
         "name": "Stinking Cloud",
-        "short_description": "Stinking Cloud is a level 3 conjuration spell. This spell allows spellcasters to create a nauseating cloud of gas that can prevent creatures from taking Actions. Targets must make Constitution  Saving throws every turn while they're in the area of effect or become \u00a0Nauseous.",
+        "short_description": "Stinking Cloud is a level 3 conjuration spell. This spell allows spellcasters to create a nauseating cloud of gas that can prevent creatures from taking Actions. Targets must make Constitution  Saving throws every turn while they're in the area of effect or become  Nauseous.",
         "long_description": "",
         "school": "Conjuration",
         "level": 3,
@@ -8568,7 +8614,7 @@
     },
     {
         "name": "Warden of Vitality",
-        "short_description": "Warden of Vitality is a level 3 evocation spell. This spell allows spellcasters to heal allies repeatedly with \u00a0Restore Vitality using only Bonus Actions for 10 turns.",
+        "short_description": "Warden of Vitality is a level 3 evocation spell. This spell allows spellcasters to heal allies repeatedly with  Restore Vitality using only Bonus Actions for 10 turns.",
         "long_description": "",
         "school": "Evocation",
         "level": 3,
@@ -9757,7 +9803,7 @@
     },
     {
         "name": "Banishing Smite",
-        "short_description": "Banishing Smite is a level 5 abjuration spell. This spells allows spellcasters to imbue their weapon with power, dealing force damage and possibly \u00a0Banishing the target.",
+        "short_description": "Banishing Smite is a level 5 abjuration spell. This spells allows spellcasters to imbue their weapon with power, dealing force damage and possibly  Banishing the target.",
         "long_description": "",
         "school": "Abjuration",
         "level": 5,
@@ -11047,7 +11093,7 @@
     },
     {
         "name": "Flesh to Stone",
-        "short_description": "Flesh to Stone is a level 6 transmutation spell. Atrophy a foe, \u00a0Restraining them until they temporarily turn to stone.",
+        "short_description": "Flesh to Stone is a level 6 transmutation spell. Atrophy a foe,  Restraining them until they temporarily turn to stone.",
         "long_description": "",
         "school": "Transmutation",
         "level": 6,
@@ -11356,7 +11402,7 @@
     },
     {
         "name": "Sunbeam",
-        "short_description": "Sunbeam is a level 6 evocation spell. This spell allows spellcasters to project a beam of light, Blinding and dealing Radiant damage to everything in its path. You can then use \u00a0Recast Sunbeam on subsequent turns without expending a Spell Slot.",
+        "short_description": "Sunbeam is a level 6 evocation spell. This spell allows spellcasters to project a beam of light, Blinding and dealing Radiant damage to everything in its path. You can then use  Recast Sunbeam on subsequent turns without expending a Spell Slot.",
         "long_description": "",
         "school": "Evocation",
         "level": 6,
