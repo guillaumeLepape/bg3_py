@@ -5,7 +5,6 @@ from uuid import UUID, uuid5
 from pydantic import (
     BaseModel,
     ConfigDict,
-    RootModel,
     SerializerFunctionWrapHandler,
     computed_field,
     model_serializer,
@@ -15,16 +14,6 @@ from bg3.characteristic import Characteristic
 from bg3.classes import CLASSES_UUID, SUBCLASSES_UUID, Class, SubClass
 from bg3.cost import Cost
 from bg3.races import RACES_UUID, SUBRACES_UUID, Race, SubRace
-
-
-class SpellProperties(BaseModel):
-    cost: List[Cost]
-    cost_on_hit: Optional[List[Cost]] = None
-    concentration: bool
-    ritual: bool
-    saving_throw: Optional[Characteristic] = None
-
-    model_config = ConfigDict(extra="forbid")
 
 
 class DraconicAncestry(str, Enum):
@@ -133,7 +122,6 @@ class ClassLevel(BaseModel):
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
     def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
-        # Ensure 'id' comes first
         return {"id": self.id, **nxt(self)}
 
 
@@ -152,7 +140,6 @@ class SubclassLevel(BaseModel):
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
     def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
-        # Ensure 'id' comes first
         return {"id": self.id, **nxt(self)}
 
 
@@ -170,7 +157,6 @@ class RaceLevel(BaseModel):
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
     def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
-        # Ensure 'id' comes first
         return {"id": self.id, **nxt(self)}
 
 
@@ -188,7 +174,6 @@ class SubRaceLevel(BaseModel):
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
     def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
-        # Ensure 'id' comes first
         return {"id": self.id, **nxt(self)}
 
 
@@ -215,6 +200,47 @@ class SchoolOfMagic(str, Enum):
 SPELL_UUID_NAMESPACE = UUID("4d783016-42b9-4a02-9fa2-03b0372081ec")
 
 
+class CantripProperties(BaseModel):
+    cost: List[Cost]
+    # cost_on_hit: Optional[List[Cost]] = None
+    concentration: bool
+    # ritual: bool
+    saving_throw: Optional[Characteristic] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class Cantrip(BaseModel):
+    name: str
+    short_description: str
+    long_description: str
+    school: SchoolOfMagic
+    properties: CantripProperties
+    how_to_learn: HowToLearn
+
+    model_config = ConfigDict(extra="forbid")
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def id(self) -> UUID:
+        return uuid5(SPELL_UUID_NAMESPACE, self.name)
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        return {"id": self.id, **nxt(self)}
+
+
+class SpellProperties(BaseModel):
+    cost: List[Cost]
+    cost_on_hit: Optional[List[Cost]] = None
+    concentration: bool
+    ritual: bool
+    saving_throw: Optional[Characteristic] = None
+
+    model_config = ConfigDict(extra="forbid")
+
+
 class Spell(BaseModel):
     name: str
     short_description: str
@@ -235,21 +261,9 @@ class Spell(BaseModel):
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
     def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
-        # Ensure 'id' comes first
         return {"id": self.id, **nxt(self)}
 
 
-class Spells(RootModel):
-    root: List[Spell]
-
-    def append(self, spell: Spell) -> None:
-        return self.root.append(spell)
-
-    def __getitem__(self, item):
-        return self.root[item]
-
-    def __iter__(self):
-        return iter(self.root)
-
-    def __len__(self) -> int:
-        return len(self.root)
+class Spells(BaseModel):
+    cantrips: List[Cantrip]
+    spells: List[Spell]

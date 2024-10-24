@@ -1,7 +1,8 @@
 from pathlib import Path
-from typing import Union
+from typing import List
 
-from .common import Class, Spell, Spells, SubClass
+from bg3.classes import Class
+from bg3.spell_new import Spell, Spells
 
 
 def is_spell_from_class(spell: Spell, class_: Class) -> bool:
@@ -12,26 +13,11 @@ def is_spell_from_class(spell: Spell, class_: Class) -> bool:
     return False
 
 
-def is_spell_from_subclass(spell: Spell, subclass: SubClass) -> bool:
-    for spell_subclass in spell.how_to_learn.subclasses:
-        if spell_subclass.name == subclass:
-            return True
-
-    return False
+def is_spell_from_class_or_subclass(spell: Spell, class_: Class) -> bool:
+    return is_spell_from_class(spell, class_)
 
 
-def is_spell_from_class_or_subclass(
-    spell: Spell, class_or_subclass: Union[Class, SubClass]
-) -> bool:
-    if isinstance(class_or_subclass, Class):
-        return is_spell_from_class(spell, class_or_subclass)
-
-    return is_spell_from_subclass(spell, class_or_subclass)
-
-
-def overlapping_spells(
-    spells: Spells, class1: Union[Class, SubClass], class2: Union[Class, SubClass]
-) -> None:
+def overlapping_spells(spells: List[Spell], class1: Class, class2: Class) -> None:
     class1_spells = [spell for spell in spells if is_spell_from_class_or_subclass(spell, class1)]
 
     header = f"-------------------- {class1.value} / {class2.value} -----------------------"
@@ -68,7 +54,7 @@ def overlapping_spells(
     print()
 
 
-def class_most_spells(spells: Spells) -> None:
+def class_most_spells(spells: List[Spell]) -> None:
     print("---------------------- Classes with most spells ---------------------------")
 
     class_to_number_of_spells = {}
@@ -86,19 +72,10 @@ def class_most_spells(spells: Spells) -> None:
     print("---------------------------------------------------------------------------")
 
 
-def main() -> int:
+def main(class1: Class, class2: Class) -> int:
     spells = Spells.model_validate_json((Path(__file__).parent / "spells.json").read_text())
 
-    overlapping_spells(spells, Class.SORCERER, Class.WIZARD)
-    overlapping_spells(spells, Class.DRUID, Class.CLERIC)
-    overlapping_spells(spells, Class.PALADIN, Class.CLERIC)
-    overlapping_spells(spells, Class.WARLOCK, Class.CLERIC)
-    overlapping_spells(spells, Class.BARD, Class.WIZARD)
-    overlapping_spells(spells, SubClass.ARCANE_TRICKSTER, Class.WIZARD)
-    overlapping_spells(spells, SubClass.ELDRITCH_KNIGHT, Class.WIZARD)
-    overlapping_spells(spells, SubClass.ELDRITCH_KNIGHT, SubClass.ARCANE_TRICKSTER)
-
-    class_most_spells(spells)
+    overlapping_spells(spells.spells, class1, class2)
 
     return 0
 

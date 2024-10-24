@@ -14,6 +14,8 @@ from bg3.cost import ACTION, BONUS_ACTION, REACTION, Cost, spell_slot
 from bg3.races import Race, SubRace
 from bg3.spell_new import (
     DRACONIC_ANCESTRY_TO_DAMAGE_TYPE,
+    Cantrip,
+    CantripProperties,
     ClassLevel,
     FavouredEnemy,
     HowToLearn,
@@ -390,6 +392,62 @@ def determine_saving_throw(details: List[str]) -> Optional[Characteristic]:
     return None
 
 
+async def add_cantrip_details_from_page(client: httpx.AsyncClient, url: str, name: str) -> Cantrip:
+    response = await client.get(url)
+
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    properties = soup.find("div", class_="bg3wiki-property-list")
+
+    costs = [parse_cost(raw_cost) for raw_cost in find_cost(properties)]
+
+    classes, subclasses = extract_class_requirements(soup)
+
+    if (
+        not classes
+        and not subclasses
+        and name not in ("Curriculum of Strategy: Artistry of War", "Dethrone")
+    ):
+        warnings.warn(f"Missing classes or subclasses: {name}")
+
+    races, subraces = extract_races_requirements(soup)
+
+    if name == "Hellish Rebuke":
+        details = []
+    else:
+        details = find_details(soup)
+
+    saving_throw = determine_saving_throw(details)
+
+    concentration = "Concentration" in details
+
+    short_description = (
+        soup.find("div", class_="bg3wiki-tooltip-box bg3wiki-tooltip-gradient-common")
+        .find_next("p")
+        .text.rstrip("\n")
+        .rstrip()
+    )
+
+    school = determine_magic_school(short_description)
+
+    return Cantrip(
+        name=name,
+        short_description=short_description,
+        long_description="",
+        school=school,
+        properties=CantripProperties(
+            cost=costs,
+            # cost_on_hit=cost_on_hit,
+            concentration=concentration,
+            # ritual=ritual,
+            saving_throw=saving_throw,
+        ),
+        how_to_learn=HowToLearn(
+            classes=classes, subclasses=subclasses, races=races, subraces=subraces
+        ),
+    )
+
+
 async def add_spell_details_from_page(
     client: httpx.AsyncClient, url: str, name: str, level: int
 ) -> Spell:
@@ -477,18 +535,30 @@ async def main() -> int:
     # Step 4: Get the next div following the target h4
     requests: List[Tuple[str, int, str]] = prepare_spell_requests(spell_headers)
 
-    async with httpx.AsyncClient() as client:  # use httpx
-        spells = Spells(
-            await asyncio.gather(
-                *[
-                    add_spell_details_from_page(client, url, name, level)
-                    for name, level, url in requests
-                ]
-            )
+    spells = Spells(cantrips=[], spells=[])
+
+    async with httpx.AsyncClient() as client:
+        spells.cantrips = await asyncio.gather(
+            *[
+                add_cantrip_details_from_page(client, url, name)
+                for name, level, url in requests
+                if level == 0
+            ]
+        )
+
+    async with httpx.AsyncClient() as client:
+        spells.spells = await asyncio.gather(
+            *[
+                add_spell_details_from_page(client, url, name, level)
+                for name, level, url in requests
+                if level >= 1
+            ]
         )
 
     # Step 5: Write the spells to a file
-    print(f"Number of spells found: {len(spells)}")
+    print(f"Number of cantrips found: {len(spells.cantrips)}")
+    print(f"Number of spells found: {len(spells.spells)}")
+    print(f"Total number of spells found: {len(spells.cantrips) + len(spells.spells)}")
 
     (Path(__file__).parent / "spells.json").write_text(
         spells.model_dump_json(indent=4, exclude_none=True) + "\n",
