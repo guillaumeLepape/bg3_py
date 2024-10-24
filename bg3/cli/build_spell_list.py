@@ -12,8 +12,7 @@ from bg3.characteristic import TRIGRAM_TO_CHARACTERISTIC, Characteristic, trigra
 from bg3.classes import CLASS_TO_SUBCLASSES, Class, SubClass
 from bg3.cost import ACTION, BONUS_ACTION, REACTION, Cost, spell_slot
 from bg3.races import Race, SubRace
-
-from .common import (
+from bg3.spell_new import (
     DRACONIC_ANCESTRY_TO_DAMAGE_TYPE,
     ClassLevel,
     FavouredEnemy,
