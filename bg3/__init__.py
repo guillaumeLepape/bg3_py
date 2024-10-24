@@ -14,7 +14,6 @@ from fastapi import FastAPI, Path, Request, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, computed_field
 
-from .ability import Ability
 from .armour import (
     heavy_armour_proficiency,
     light_armour_proficiency,
@@ -22,6 +21,7 @@ from .armour import (
     shield_proficiency,
 )
 from .cantrip import bard_cantrips, cleric_cantrips
+from .characteristic import Characteristic
 from .class_action import (
     ClassAction,
     action_surge,
@@ -96,6 +96,9 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
+
+
+__version__ = "0.1.0"
 
 
 class PrettyJSONResponse(Response):
@@ -215,7 +218,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[light_armour_proficiency, medium_armour_proficiency, shield_proficiency],
                 weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
-                saving_throws=[Ability.STRENGTH, Ability.CONSTITUTION],
+                saving_throws=[Characteristic.STRENGTH, Characteristic.CONSTITUTION],
             )
         elif level == 1:
             result.features = [Feature(name="Rage"), Feature(name="Unarmored defense")]
@@ -256,7 +259,7 @@ def classes(
                     longsword_proficiency,
                     shortsword_proficiency,
                 ],
-                saving_throws=[Ability.DEXTERITY, Ability.CHARISMA],
+                saving_throws=[Characteristic.DEXTERITY, Characteristic.CHARISMA],
             )
         elif level == 1:
             result.class_resources = ClassResources(bardic_inspirations=3)
@@ -276,7 +279,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[light_armour_proficiency, medium_armour_proficiency, shield_proficiency],
                 weapons=[*simple_weapon_proficiencies, flail_proficiency, morningstar_proficiency],
-                saving_throws=[Ability.WISDOM, Ability.CHARISMA],
+                saving_throws=[Characteristic.WISDOM, Characteristic.CHARISMA],
             )
         elif level == 1:
             result.choices = Choices(
@@ -326,7 +329,7 @@ def classes(
                     sickle_proficiency,
                     spear_proficiency,
                 ],
-                saving_throws=[Ability.WISDOM, Ability.INTELLIGENCE],
+                saving_throws=[Characteristic.WISDOM, Characteristic.INTELLIGENCE],
             )
 
     if class_name == Class.FIGHTER:
@@ -339,7 +342,7 @@ def classes(
                     shield_proficiency,
                 ],
                 weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
-                saving_throws=[Ability.STRENGTH, Ability.CONSTITUTION],
+                saving_throws=[Characteristic.STRENGTH, Characteristic.CONSTITUTION],
             )
         elif level == 1:
             result.fighting_style = [
@@ -391,7 +394,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[],
                 weapons=[*simple_weapon_proficiencies, shortsword_proficiency],
-                saving_throws=[Ability.STRENGTH, Ability.DEXTERITY],
+                saving_throws=[Characteristic.STRENGTH, Characteristic.DEXTERITY],
             )
 
     if class_name == Class.PALADIN:
@@ -404,7 +407,7 @@ def classes(
                     shield_proficiency,
                 ],
                 weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
-                saving_throws=[Ability.WISDOM, Ability.CHARISMA],
+                saving_throws=[Characteristic.WISDOM, Characteristic.CHARISMA],
             )
 
     if class_name == Class.RANGER:
@@ -412,7 +415,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[light_armour_proficiency, medium_armour_proficiency],
                 weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
-                saving_throws=[Ability.STRENGTH, Ability.DEXTERITY],
+                saving_throws=[Characteristic.STRENGTH, Characteristic.DEXTERITY],
             )
 
     if class_name == Class.ROGUE:
@@ -426,7 +429,7 @@ def classes(
                     rapier_proficiency,
                     shortsword_proficiency,
                 ],
-                saving_throws=[Ability.DEXTERITY, Ability.INTELLIGENCE],
+                saving_throws=[Characteristic.DEXTERITY, Characteristic.INTELLIGENCE],
             )
 
     if class_name == Class.SORCERER:
@@ -434,7 +437,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[],
                 weapons=[dagger_proficiency, quarterstaff_proficiency, light_crossbow_proficiency],
-                saving_throws=[Ability.CHARISMA, Ability.CONSTITUTION],
+                saving_throws=[Characteristic.CHARISMA, Characteristic.CONSTITUTION],
             )
 
     if class_name == Class.WARLOCK:
@@ -442,7 +445,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[light_armour_proficiency],
                 weapons=[*simple_weapon_proficiencies],
-                saving_throws=[Ability.WISDOM, Ability.CHARISMA],
+                saving_throws=[Characteristic.WISDOM, Characteristic.CHARISMA],
             )
 
     if class_name == Class.WIZARD:
@@ -450,7 +453,7 @@ def classes(
             result.proficiencies = Proficiencies(
                 armours=[],
                 weapons=[dagger_proficiency, quarterstaff_proficiency, light_crossbow_proficiency],
-                saving_throws=[Ability.INTELLIGENCE, Ability.WISDOM],
+                saving_throws=[Characteristic.INTELLIGENCE, Characteristic.WISDOM],
             )
 
     return result

@@ -8,19 +8,21 @@ from typing import Any, Iterable, List, Optional, Tuple, Union
 import httpx
 from bs4 import BeautifulSoup
 
+from bg3.characteristic import TRIGRAM_TO_CHARACTERISTIC, Characteristic, trigram_to_characteristic
 from bg3.classes import CLASS_TO_SUBCLASSES, Class, SubClass
+from bg3.cost import ACTION, BONUS_ACTION, REACTION, Cost, spell_slot
 from bg3.races import Race, SubRace
 
 from .common import (
     DRACONIC_ANCESTRY_TO_DAMAGE_TYPE,
     ClassLevel,
-    Cost,
     FavouredEnemy,
     HowToLearn,
     LandCircle,
     NaturalExplorer,
     PactBoon,
     RaceLevel,
+    SchoolOfMagic,
     Spell,
     SpellProperties,
     Spells,
@@ -35,19 +37,19 @@ BASE_URL = "https://bg3.wiki"
 
 def parse_cost(raw_cost: str) -> Cost:
     if raw_cost.lower() == "action":
-        return Cost(name="Action")
+        return ACTION
 
     if raw_cost.lower() == "bonus action":
-        return Cost(name="Bonus action")
+        return BONUS_ACTION
 
     if raw_cost.lower() == "reaction":
-        return Cost(name="Reaction")
+        return REACTION
 
     match_regex = re.match(r"Level ([1-6]) Spell Slot", raw_cost)
 
     if match_regex:
         try:
-            return Cost(name="Spell Slot", level=int(match_regex.group(1)))
+            return spell_slot(int(match_regex.group(1)))
         except ValueError:
             pass
 
@@ -240,7 +242,7 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
                     via = parse_via(subclass_name, raw_via)
 
                     subclasses.append(
-                        SubclassLevel(
+                        SubclassLevel.create(
                             name=subclass_name,
                             level=level,
                             via=via,
@@ -250,7 +252,7 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
                 via = parse_via(class_name, raw_via)
 
                 classes.append(
-                    ClassLevel(
+                    ClassLevel.create(
                         name=class_name,
                         level=level,
                         via=via,
@@ -277,7 +279,7 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
                 via = parse_via(subclass_name, raw_via)
 
                 return [], [
-                    SubclassLevel(
+                    SubclassLevel.create(
                         name=subclass_name,
                         level=level,
                         via=via,
@@ -287,7 +289,7 @@ def parse_class_level(raw_class_level: str) -> Tuple[List[ClassLevel], List[Subc
             via = parse_via(class_name, raw_via)
 
             return [
-                ClassLevel(
+                ClassLevel.create(
                     name=class_name,
                     level=level,
                     via=via,
@@ -389,6 +391,24 @@ def extract_races_requirements(soup: BeautifulSoup) -> Tuple[List[RaceLevel], Li
     return races, subraces
 
 
+def determine_magic_school(description: str) -> SchoolOfMagic:
+    for school in SchoolOfMagic:
+        if school.value.lower() in description.lower():
+            return school
+
+    raise ValueError(f"Couldn't determine magic school: {description}")
+
+
+def determine_saving_throw(details: List[str]) -> Optional[Characteristic]:
+    for detail in details:
+        match_regex = re.match(f"({'|'.join(TRIGRAM_TO_CHARACTERISTIC)}) Save", detail)
+
+        if match_regex:
+            return trigram_to_characteristic(match_regex.group(1))
+
+    return None
+
+
 async def add_spell_details_from_page(
     client: httpx.AsyncClient, url: str, name: str, level: int
 ) -> Spell:
@@ -426,19 +446,32 @@ async def add_spell_details_from_page(
     else:
         details = find_details(soup)
 
+    saving_throw = determine_saving_throw(details)
+
     ritual = "Ritual" in details
     concentration = "Concentration" in details
 
+    short_description = (
+        soup.find("div", class_="bg3wiki-tooltip-box bg3wiki-tooltip-gradient-common")
+        .find_next("p")
+        .text.rstrip("\n")
+        .rstrip()
+    )
+
+    school = determine_magic_school(short_description)
+
     return Spell(
         name=name,
-        short_description="",
+        short_description=short_description,
         long_description="",
+        school=school,
         level=level,
         properties=SpellProperties(
             cost=costs,
             cost_on_hit=cost_on_hit,
             concentration=concentration,
             ritual=ritual,
+            saving_throw=saving_throw,
         ),
         can_upcast=find_upcast(soup),
         how_to_learn=HowToLearn(

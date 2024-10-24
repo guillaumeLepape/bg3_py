@@ -1,15 +1,13 @@
 from enum import Enum
 from typing import List, Optional, Union
+from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, RootModel
 
-from bg3.classes import Class, SubClass
+from bg3.characteristic import Characteristic
+from bg3.classes import CLASSES_UUID, SUBCLASSES_UUID, Class, SubClass
+from bg3.cost import Cost
 from bg3.races import Race, SubRace
-
-
-class Cost(BaseModel):
-    name: str
-    level: Optional[int] = None
 
 
 class SpellProperties(BaseModel):
@@ -17,6 +15,7 @@ class SpellProperties(BaseModel):
     cost_on_hit: Optional[List[Cost]] = None
     concentration: bool
     ritual: bool
+    saving_throw: Optional[Characteristic] = None
 
     model_config = ConfigDict(extra="forbid")
 
@@ -113,19 +112,29 @@ class Via(BaseModel):
 
 
 class ClassLevel(BaseModel):
+    id: UUID
     name: Class
     level: int
     via: Union[str, Via, None] = None
 
     model_config = ConfigDict(extra="forbid")
 
+    @classmethod
+    def create(cls, name: Class, level: int, via: Union[str, Via, None]) -> "ClassLevel":
+        return cls(id=CLASSES_UUID[name], name=name, level=level, via=via)
+
 
 class SubclassLevel(BaseModel):
+    id: UUID
     name: SubClass
     level: int
     via: Union[str, Via, None] = None
 
     model_config = ConfigDict(extra="forbid")
+
+    @classmethod
+    def create(cls, name: SubClass, level: int, via: Union[str, Via, None]) -> "SubclassLevel":
+        return cls(id=SUBCLASSES_UUID[name], name=name, level=level, via=via)
 
 
 class RaceLevel(BaseModel):
@@ -151,10 +160,22 @@ class HowToLearn(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class SchoolOfMagic(str, Enum):
+    ABJURATION = "Abjuration"
+    CONJURATION = "Conjuration"
+    DIVINATION = "Divination"
+    ENCHANTMENT = "Enchantment"
+    EVOCATION = "Evocation"
+    ILLUSION = "Illusion"
+    NECROMANCY = "Necromancy"
+    TRANSMUTATION = "Transmutation"
+
+
 class Spell(BaseModel):
     name: str
     short_description: str
     long_description: str
+    school: SchoolOfMagic
     level: int
     properties: SpellProperties
     can_upcast: bool
