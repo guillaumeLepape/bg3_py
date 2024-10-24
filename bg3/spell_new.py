@@ -11,7 +11,7 @@ from pydantic import (
 )
 
 from bg3.characteristic import Characteristic
-from bg3.classes import CLASSES_UUID, SUBCLASSES_UUID, Class, SubClass
+from bg3.classes import Class, SubClass, class_uuid, subclass_uuid
 from bg3.cost import Cost
 from bg3.races import RACES_UUID, SUBRACES_UUID, Race, SubRace
 
@@ -117,7 +117,7 @@ class ClassLevel(BaseModel):
     @computed_field  # type: ignore[prop-decorator]
     @property
     def id(self) -> UUID:
-        return CLASSES_UUID[self.name]
+        return class_uuid(self.name)
 
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
@@ -135,7 +135,7 @@ class SubclassLevel(BaseModel):
     @computed_field  # type: ignore[prop-decorator]
     @property
     def id(self) -> UUID:
-        return SUBCLASSES_UUID[self.name]
+        return subclass_uuid(self.name)
 
     # Custom serializer to ensure 'id' comes first
     @model_serializer(mode="wrap")
