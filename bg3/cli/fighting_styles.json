@@ -1,0 +1,190 @@
+[
+    {
+        "id": "7659f49e-3ed9-5170-9b63-162750b6d722",
+        "name": "Archery",
+        "description": "You gain a +2 bonus to Ranged Weapon attack rolls.",
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "3a98a7b1-065e-551e-aadb-fa0e52b3666d",
+                    "name": "Fighter",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 2
+                }
+            ],
+            "subclasses": [
+                {
+                    "id": "4165a39d-431c-5478-8180-42ec988bbb44",
+                    "name": "Champion",
+                    "level": 10
+                }
+            ],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "d9bf2997-c7e0-56a4-82bb-faf38872df95",
+        "name": "Defence",
+        "description": "You gain a +1 bonus to armour Class while wearing Armour.",
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "3a98a7b1-065e-551e-aadb-fa0e52b3666d",
+                    "name": "Fighter",
+                    "level": 1
+                },
+                {
+                    "id": "5c1d8861-79c2-5503-a718-2e8b3c977492",
+                    "name": "Paladin",
+                    "level": 2
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 2
+                }
+            ],
+            "subclasses": [
+                {
+                    "id": "4165a39d-431c-5478-8180-42ec988bbb44",
+                    "name": "Champion",
+                    "level": 10
+                }
+            ],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "e290abfc-eb47-5434-afb8-243ca6d53383",
+        "name": "Duelling",
+        "description": "When you are wielding a melee weapon that is not Two-Handed or Versatile in one hand and no weapon in the other hand, you gain a +2 bonus to damage rolls with that weapon, increasing your chance to do heavy damage.",
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "3a98a7b1-065e-551e-aadb-fa0e52b3666d",
+                    "name": "Fighter",
+                    "level": 1
+                },
+                {
+                    "id": "5c1d8861-79c2-5503-a718-2e8b3c977492",
+                    "name": "Paladin",
+                    "level": 2
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 2
+                }
+            ],
+            "subclasses": [
+                {
+                    "id": "f10817f8-e954-5b55-8386-c1522f66b94c",
+                    "name": "College of Swords",
+                    "level": 3
+                },
+                {
+                    "id": "4165a39d-431c-5478-8180-42ec988bbb44",
+                    "name": "Champion",
+                    "level": 10
+                }
+            ],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "c62467a0-83ac-56b8-9021-9eb0a38ad397",
+        "name": "Great Weapon Fighting",
+        "description": "When you roll a 1 or 2 on a damage die for an attack with a Two-Handed melee weapon, that die is rerolled once.",
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "3a98a7b1-065e-551e-aadb-fa0e52b3666d",
+                    "name": "Fighter",
+                    "level": 1
+                },
+                {
+                    "id": "5c1d8861-79c2-5503-a718-2e8b3c977492",
+                    "name": "Paladin",
+                    "level": 2
+                }
+            ],
+            "subclasses": [
+                {
+                    "id": "4165a39d-431c-5478-8180-42ec988bbb44",
+                    "name": "Champion",
+                    "level": 10
+                }
+            ],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "20ad2e0e-7d80-5666-8f0b-26441d801995",
+        "name": "Protection",
+        "description": "When you have a Shield, impose Disadvantage on an enemy who attacks one of your allies when you are within  1.5 m / 5 ft. You must be able to see the enemy.",
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "3a98a7b1-065e-551e-aadb-fa0e52b3666d",
+                    "name": "Fighter",
+                    "level": 1
+                },
+                {
+                    "id": "5c1d8861-79c2-5503-a718-2e8b3c977492",
+                    "name": "Paladin",
+                    "level": 2
+                }
+            ],
+            "subclasses": [
+                {
+                    "id": "4165a39d-431c-5478-8180-42ec988bbb44",
+                    "name": "Champion",
+                    "level": 10
+                }
+            ],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "3a5931f7-517f-5b60-9ed8-f0629c85be27",
+        "name": "Two-Weapon Fighting",
+        "description": "When you make an offhand attack, you can add your Ability Modifier to the damage of the attack.",
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "3a98a7b1-065e-551e-aadb-fa0e52b3666d",
+                    "name": "Fighter",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 2
+                }
+            ],
+            "subclasses": [
+                {
+                    "id": "f10817f8-e954-5b55-8386-c1522f66b94c",
+                    "name": "College of Swords",
+                    "level": 3
+                },
+                {
+                    "id": "4165a39d-431c-5478-8180-42ec988bbb44",
+                    "name": "Champion",
+                    "level": 10
+                }
+            ],
+            "races": [],
+            "subraces": []
+        }
+    }
+]

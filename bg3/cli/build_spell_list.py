@@ -412,10 +412,7 @@ async def add_cantrip_details_from_page(client: httpx.AsyncClient, url: str, nam
 
     races, subraces = extract_races_requirements(soup)
 
-    if name == "Hellish Rebuke":
-        details = []
-    else:
-        details = find_details(soup)
+    details = find_details(soup)
 
     saving_throw = determine_saving_throw(details)
 
@@ -453,6 +450,9 @@ async def add_spell_details_from_page(
 ) -> Spell:
     url = url.removesuffix("_(Melee)")
     url = url.removesuffix("_(Ranged)")
+
+    if url.endswith("Shield") and not url.endswith("Fire_Shield"):
+        url += "_(spell)"
 
     response = await client.get(url)
 
