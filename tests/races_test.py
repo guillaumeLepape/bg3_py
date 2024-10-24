@@ -1,4 +1,4 @@
-from bg3.races import RACE_TO_SUBRACES, RACES_UUID, SUBCLASSES_UUID, Race, SubRace
+from bg3.races import RACE_TO_SUBRACES, RACES_UUID, SUBRACES_UUID, Race, SubRace
 
 
 def test_race() -> None:
@@ -9,4 +9,4 @@ def test_race() -> None:
     assert sum(1 for subraces in RACE_TO_SUBRACES.values() for _ in subraces) == 28
 
     assert len(RACES_UUID) == 11
-    assert len(SUBCLASSES_UUID) == 28
+    assert len(SUBRACES_UUID) == 28

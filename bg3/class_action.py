@@ -16,7 +16,8 @@ class ClassAction(BaseModel):
 
     cost: Optional[List[Cost]] = None
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def icon(self) -> str:
         return f"/static/class_actions/{self.name.replace(' ', '_')}.webp"
 

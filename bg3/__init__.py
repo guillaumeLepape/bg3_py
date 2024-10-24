@@ -134,7 +134,8 @@ class Character(BaseModel):
 
     subclasses: Dict[Class, Subclass]
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def level(self) -> int:
         return len(self.classes)
 
