@@ -9,6 +9,8 @@ class ClassResources(BaseModel):
     channel_divinity_charges: Optional[int] = None
     superiority_dices: Optional[int] = None
 
+    model_config = ConfigDict(extra="forbid")
+
     def __add__(self, other: object) -> "ClassResources":
         if not isinstance(other, ClassResources):
             raise NotImplementedError
@@ -38,5 +40,3 @@ class ClassResources(BaseModel):
                 else None
             ),
         )
-
-    model_config = ConfigDict(extra="forbid")

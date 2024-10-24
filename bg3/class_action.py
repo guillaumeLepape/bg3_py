@@ -21,7 +21,7 @@ class ClassAction(BaseModel):
         return f"/static/class_actions/{self.name.replace(' ', '_')}.webp"
 
     def check_icon(self) -> bool:
-        path = self.icon().removeprefix("/")
+        path = self.icon.removeprefix("/")
 
         return (Path(__file__).parents[1] / path).is_file()
 
