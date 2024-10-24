@@ -1,22 +1,33 @@
 from typing import Optional
-from uuid import UUID
+from uuid import UUID, uuid5
 
-from pydantic import BaseModel
+from pydantic import BaseModel, computed_field
+
+COST_UUID_NAMESPACE = UUID("2c035d10-f9cc-4ac8-af3a-9ad4ac15073a")
 
 
 class Cost(BaseModel):
-    id: UUID
     name: str
     level: Optional[int] = None
 
+    @computed_field
+    @property
+    def id(self) -> UUID:
+        if self.level is not None:
+            hash = f"{self.name}{self.level}"
+        else:
+            hash = self.name
 
-ACTION = Cost(id="bcf456ed-0788-4e9c-9b70-29b7214cde0e", name="Action")
-BONUS_ACTION = Cost(id="e4e85d3a-f253-4c72-8b92-61a351033cc3", name="Bonus Action")
-REACTION = Cost(id="20407051-3230-4a26-80ed-934ef57cf7a2", name="Reaction")
+        return uuid5(COST_UUID_NAMESPACE, hash)
+
+
+ACTION = Cost(name="Action")
+BONUS_ACTION = Cost(name="Bonus Action")
+REACTION = Cost(name="Reaction")
 
 
 def spell_slot(level: int) -> Cost:
-    return Cost(id="c7e1c0e6-4b2a-4f7f-9f6f-4f0c1d3f8e8b", name="Spell Slot", level=level)
+    return Cost(name="Spell Slot", level=level)
 
 
 channel_divinity_charge = Cost(
