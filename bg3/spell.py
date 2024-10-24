@@ -13,7 +13,8 @@ class Spell(BaseModel):
     level: int
     ritual: bool = False
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def icon(self) -> str:
         return f"/static/cantrips/{self.name.lower().replace(' ', '_')}.jpg"
 

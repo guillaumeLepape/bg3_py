@@ -11,7 +11,8 @@ class Cantrip(BaseModel):
     id: UUID
     name: str
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def icon(self) -> str:
         return f"/static/cantrips/{self.name.replace(' ', '_')}.jpg"
 

@@ -1,12 +1,12 @@
 from enum import Enum
 from typing import List, Optional, Union
-from uuid import UUID
+from uuid import UUID, uuid5
 
 from pydantic import (
     BaseModel,
     ConfigDict,
     RootModel,
-    SerializationInfo,
+    SerializerFunctionWrapHandler,
     computed_field,
     model_serializer,
 )
@@ -125,28 +125,16 @@ class ClassLevel(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def id(self) -> UUID:
         return CLASSES_UUID[self.name]
 
     # Custom serializer to ensure 'id' comes first
-    @model_serializer
-    def custom_serialize(self, info: SerializationInfo) -> dict:
-        data = {
-            "id": self.id,  # Ensure 'id' comes first
-            "name": self.name,
-            "level": self.level,
-        }
-
-        if self.via is None:
-            return data
-
-        if isinstance(self.via, str):
-            data["via"] = self.via
-        else:
-            data["via"] = self.via.model_dump(**info.__dict__)
-
-        return data
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        # Ensure 'id' comes first
+        return {"id": self.id, **nxt(self)}
 
 
 class SubclassLevel(BaseModel):
@@ -156,28 +144,16 @@ class SubclassLevel(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def id(self) -> UUID:
         return SUBCLASSES_UUID[self.name]
 
     # Custom serializer to ensure 'id' comes first
-    @model_serializer
-    def custom_serialize(self, info: SerializationInfo) -> dict:
-        data = {
-            "id": self.id,  # Ensure 'id' comes first
-            "name": self.name,
-            "level": self.level,
-        }
-
-        if self.via is None:
-            return data
-
-        if isinstance(self.via, str):
-            data["via"] = self.via
-        else:
-            data["via"] = self.via.model_dump(**info.__dict__)
-
-        return data
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        # Ensure 'id' comes first
+        return {"id": self.id, **nxt(self)}
 
 
 class RaceLevel(BaseModel):
@@ -186,18 +162,16 @@ class RaceLevel(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def id(self) -> UUID:
         return RACES_UUID[self.name]
 
     # Custom serializer to ensure 'id' comes first
-    @model_serializer
-    def custom_serialize(self) -> dict:
-        return {
-            "id": self.id,  # Ensure 'id' comes first
-            "name": self.name,
-            "level": self.level,
-        }
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        # Ensure 'id' comes first
+        return {"id": self.id, **nxt(self)}
 
 
 class SubRaceLevel(BaseModel):
@@ -206,18 +180,16 @@ class SubRaceLevel(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
+    @property
     def id(self) -> UUID:
         return SUBRACES_UUID[self.name]
 
     # Custom serializer to ensure 'id' comes first
-    @model_serializer
-    def custom_serialize(self) -> dict:
-        return {
-            "id": self.id,  # Ensure 'id' comes first
-            "name": self.name,
-            "level": self.level,
-        }
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        # Ensure 'id' comes first
+        return {"id": self.id, **nxt(self)}
 
 
 class HowToLearn(BaseModel):
@@ -240,6 +212,9 @@ class SchoolOfMagic(str, Enum):
     TRANSMUTATION = "Transmutation"
 
 
+SPELL_UUID_NAMESPACE = UUID("4d783016-42b9-4a02-9fa2-03b0372081ec")
+
+
 class Spell(BaseModel):
     name: str
     short_description: str
@@ -251,6 +226,17 @@ class Spell(BaseModel):
     how_to_learn: HowToLearn
 
     model_config = ConfigDict(extra="forbid")
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def id(self) -> UUID:
+        return uuid5(SPELL_UUID_NAMESPACE, self.name)
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        # Ensure 'id' comes first
+        return {"id": self.id, **nxt(self)}
 
 
 class Spells(RootModel):
