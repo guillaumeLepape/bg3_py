@@ -129,11 +129,11 @@ class ClassLevellingResult(BaseModel):
 class Character(BaseModel):
     classes: List[Class]
 
+    subclasses: Dict[Class, Subclass]
+
     @computed_field
     def level(self) -> int:
         return len(self.classes)
-
-    subclasses: Dict[Class, Subclass]
 
 
 db: Dict[UUID, Character] = {

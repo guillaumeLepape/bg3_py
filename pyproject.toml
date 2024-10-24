@@ -1,8 +1,27 @@
+[build-system]
+requires = ["hatchling >= 1.25.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bg3"
+description = "Bg3 game engine"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [{name = "Guillaume Le Pape", email = "gui.lepape25@gmail.com"}]
+classifiers = ["Programming Language :: Python"]
+dependencies = [
+    "beautifulsoup4==4.12.3",
+    "fastapi==0.112.0",
+    "httpx==0.27.2",
+]
+dynamic = ["version"]
+
 [tool.ruff]
 line-length = 100
 
 [tool.ruff.lint]
-select = ["E", "F", "INP"]
+select = ["E", "F", "I", "INP"]
 
 [tool.pytest.ini_options]
 log_file = "bg3_test.log"

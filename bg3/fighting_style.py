@@ -25,9 +25,9 @@ duelling = FightingStyle(
     id="d738da35-7546-49b6-9145-a192c9ccde83",
     name="Duelling",
     description=(
-        "When you are wielding a melee weapon that is not Two-Handed or Versatile in one hand, and "
-        "no weapon in the other hand, you gain a +2 bonus to damage rolls with that weapon, increas"
-        "ing your chance to do heavy damage."
+        "When you are wielding a melee weapon that is not Two-Handed or Versatile in one hand and "
+        "no weapon in the other hand, you gain a +2 bonus to damage rolls with that weapon, "
+        "increasing your chance to do heavy damage."
     ),
 )
 
@@ -44,9 +44,8 @@ protection = FightingStyle(
     id="1c9f4f1b-e52d-447e-91df-2d5c40e5e049",
     name="Protection",
     description=(
-        "When you have a Shield, impose Disadvantage on an enemy who attacks one of your allies whe"
-        "n you are within  1.5 m / 5 ft. You must be able to see the enemy. (This is a reaction. To"
-        "ggle a reaction during your turn. It will automatically execute when needed."
+        "When you have a Shield, impose Disadvantage on an enemy who attacks one of your allies "
+        "when you are within  1.5 m / 5 ft. You must be able to see the enemy."
     ),
 )
 
