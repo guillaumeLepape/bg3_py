@@ -2,12 +2,19 @@ from enum import Enum
 from typing import List, Optional, Union
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, RootModel
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    RootModel,
+    SerializationInfo,
+    computed_field,
+    model_serializer,
+)
 
 from bg3.characteristic import Characteristic
 from bg3.classes import CLASSES_UUID, SUBCLASSES_UUID, Class, SubClass
 from bg3.cost import Cost
-from bg3.races import Race, SubRace
+from bg3.races import RACES_UUID, SUBRACES_UUID, Race, SubRace
 
 
 class SpellProperties(BaseModel):
@@ -112,29 +119,65 @@ class Via(BaseModel):
 
 
 class ClassLevel(BaseModel):
-    id: UUID
     name: Class
     level: int
     via: Union[str, Via, None] = None
 
     model_config = ConfigDict(extra="forbid")
 
-    @classmethod
-    def create(cls, name: Class, level: int, via: Union[str, Via, None]) -> "ClassLevel":
-        return cls(id=CLASSES_UUID[name], name=name, level=level, via=via)
+    @computed_field
+    def id(self) -> UUID:
+        return CLASSES_UUID[self.name]
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer
+    def custom_serialize(self, info: SerializationInfo) -> dict:
+        data = {
+            "id": self.id,  # Ensure 'id' comes first
+            "name": self.name,
+            "level": self.level,
+        }
+
+        if self.via is None:
+            return data
+
+        if isinstance(self.via, str):
+            data["via"] = self.via
+        else:
+            data["via"] = self.via.model_dump(**info.__dict__)
+
+        return data
 
 
 class SubclassLevel(BaseModel):
-    id: UUID
     name: SubClass
     level: int
     via: Union[str, Via, None] = None
 
     model_config = ConfigDict(extra="forbid")
 
-    @classmethod
-    def create(cls, name: SubClass, level: int, via: Union[str, Via, None]) -> "SubclassLevel":
-        return cls(id=SUBCLASSES_UUID[name], name=name, level=level, via=via)
+    @computed_field
+    def id(self) -> UUID:
+        return SUBCLASSES_UUID[self.name]
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer
+    def custom_serialize(self, info: SerializationInfo) -> dict:
+        data = {
+            "id": self.id,  # Ensure 'id' comes first
+            "name": self.name,
+            "level": self.level,
+        }
+
+        if self.via is None:
+            return data
+
+        if isinstance(self.via, str):
+            data["via"] = self.via
+        else:
+            data["via"] = self.via.model_dump(**info.__dict__)
+
+        return data
 
 
 class RaceLevel(BaseModel):
@@ -143,12 +186,38 @@ class RaceLevel(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
+    @computed_field
+    def id(self) -> UUID:
+        return RACES_UUID[self.name]
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer
+    def custom_serialize(self) -> dict:
+        return {
+            "id": self.id,  # Ensure 'id' comes first
+            "name": self.name,
+            "level": self.level,
+        }
+
 
 class SubRaceLevel(BaseModel):
     name: SubRace
     level: int
 
     model_config = ConfigDict(extra="forbid")
+
+    @computed_field
+    def id(self) -> UUID:
+        return SUBRACES_UUID[self.name]
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer
+    def custom_serialize(self) -> dict:
+        return {
+            "id": self.id,  # Ensure 'id' comes first
+            "name": self.name,
+            "level": self.level,
+        }
 
 
 class HowToLearn(BaseModel):
