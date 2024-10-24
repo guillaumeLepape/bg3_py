@@ -10,7 +10,7 @@ class Cost(BaseModel):
     name: str
     level: Optional[int] = None
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def id(self) -> UUID:
         if self.level is not None:

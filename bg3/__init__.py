@@ -39,13 +39,13 @@ from .classes import Class
 from .feat import new_feat
 from .feature import Feature
 from .fighting_style import (
+    ARCHERY,
+    DEFENCE,
+    DUELLING,
+    GREAT_WEAPON_FIGHTING,
+    PROTECTION,
+    TWO_WEAPON_FIGHTING,
     FightingStyle,
-    archery,
-    defence,
-    duelling,
-    great_weapon_fighting,
-    protection,
-    two_weapon_fighting,
 )
 from .proficiency import Proficiencies
 from .spell import bard_level_1_spells
@@ -347,12 +347,12 @@ def classes(
             )
         elif level == 1:
             result.fighting_style = [
-                archery,
-                defence,
-                duelling,
-                great_weapon_fighting,
-                protection,
-                two_weapon_fighting,
+                ARCHERY,
+                DEFENCE,
+                DUELLING,
+                GREAT_WEAPON_FIGHTING,
+                PROTECTION,
+                TWO_WEAPON_FIGHTING,
             ]
             result.class_actions = [second_wind]
         elif level == 2:

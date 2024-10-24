@@ -1,28 +1,29 @@
-from uuid import UUID
+from uuid import UUID, uuid5
 
-from pydantic import BaseModel
+from pydantic import BaseModel, computed_field
+
+FIGHTING_STYLE_UUID_NAMESPACE = UUID("0becb2f3-a09d-42ac-9508-1f7331c7bad2")
 
 
 class FightingStyle(BaseModel):
-    id: UUID
     name: str
     description: str
 
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def id(self) -> UUID:
+        return uuid5(FIGHTING_STYLE_UUID_NAMESPACE, self.name)
 
-archery = FightingStyle(
-    id="f9cf5a8b-e701-48bd-8a3f-ab34356754fc",
-    name="Archery",
-    description="You gain a +2 bonus to Ranged Weapon attack rolls.",
+
+ARCHERY = FightingStyle(
+    name="Archery", description="You gain a +2 bonus to Ranged Weapon attack rolls."
 )
 
-defence = FightingStyle(
-    id="e9c499f0-d6ba-4eb8-98d2-2583c35e30c5",
-    name="Defence",
-    description="You gain a +1 bonus to armour Class while wearing Armour.",
+DEFENCE = FightingStyle(
+    name="Defence", description="You gain a +1 bonus to armour Class while wearing Armour."
 )
 
-duelling = FightingStyle(
-    id="d738da35-7546-49b6-9145-a192c9ccde83",
+DUELLING = FightingStyle(
     name="Duelling",
     description=(
         "When you are wielding a melee weapon that is not Two-Handed or Versatile in one hand and "
@@ -31,8 +32,7 @@ duelling = FightingStyle(
     ),
 )
 
-great_weapon_fighting = FightingStyle(
-    id="5a3784b7-8792-4d76-90b1-38e9f54a496d",
+GREAT_WEAPON_FIGHTING = FightingStyle(
     name="Great Weapon Fighting",
     description=(
         "When you roll a 1 or 2 on a damage die for an attack with a Two-Handed melee weapon, that "
@@ -40,8 +40,7 @@ great_weapon_fighting = FightingStyle(
     ),
 )
 
-protection = FightingStyle(
-    id="1c9f4f1b-e52d-447e-91df-2d5c40e5e049",
+PROTECTION = FightingStyle(
     name="Protection",
     description=(
         "When you have a Shield, impose Disadvantage on an enemy who attacks one of your allies "
@@ -49,8 +48,7 @@ protection = FightingStyle(
     ),
 )
 
-two_weapon_fighting = FightingStyle(
-    id="065f1944-5357-417d-98dd-a1ba21da6ffb",
+TWO_WEAPON_FIGHTING = FightingStyle(
     name="Two-Weapon Fighting",
     description=(
         "When you make an offhand attack, you can add your Ability Modifier to the damage of the at"

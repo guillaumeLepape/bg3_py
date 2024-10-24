@@ -78,7 +78,3 @@ def main(class1: Class, class2: Class) -> int:
     overlapping_spells(spells.spells, class1, class2)
 
     return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
