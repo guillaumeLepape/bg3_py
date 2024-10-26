@@ -1,0 +1,156 @@
+[
+    {
+        "id": "b11b85d7-4e3d-5496-a6e7-2a82869401e9",
+        "name": "Bounty Hunter",
+        "description": "Gain Proficiency in Investigation. Creatures you hit with Ensnaring Strike (either ranged or melee) have Disadvantage on their Saving Throw.",
+        "grants": [
+            "Investigation Proficiency"
+        ],
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 6
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 10
+                }
+            ],
+            "subclasses": [],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "642efb28-d81e-5474-b52d-31bf6fa8c6b4",
+        "name": "Keeper of the Veil",
+        "description": "You specialise in hunting creatures from other planes of existence. You gain Proficiency in Arcana and can grant protection against aberrations, celestials, elementals, fey, fiends, and undead.",
+        "grants": [
+            "Arcana Proficiency",
+            "Protection from Evil and Good, Recharge on long rest."
+        ],
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 6
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 10
+                }
+            ],
+            "subclasses": [],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "421b00de-d163-589f-a6ab-d8c3bfee87e7",
+        "name": "Mage Breaker",
+        "description": "You have a history of battling spellcasters. Gain Proficiency with Arcana and True Strike, which gives you Advantage Icon.png Advantage on Attack Rolls against a creature. Wisdom is your Spellcasting Ability for this spell.",
+        "grants": [
+            "Arcana Proficiency",
+            "Cantrip: True Strike"
+        ],
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 6
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 10
+                }
+            ],
+            "subclasses": [],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "9f65ef0c-b9cd-571e-8f2b-dd2325713222",
+        "name": "Ranger Knight",
+        "description": "You have sworn to serve a crown or nation and seek to bring its foes to ruin. Gain Proficiency with History and Proficiency with Heavy Armour.",
+        "grants": [
+            "Heavy armour Proficiency",
+            "History Proficiency"
+        ],
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 6
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 10
+                }
+            ],
+            "subclasses": [],
+            "races": [],
+            "subraces": []
+        }
+    },
+    {
+        "id": "6f87aeba-a663-5ebc-b8f1-503ca00bdfb0",
+        "name": "Sanctified Stalker",
+        "description": "You swore to hunt the enemies of a holy or druidic order. Gain Proficiency with Religion and the Sacred Flame Cantrip, which deals 1d8 Radiant damage. Wisdom is your Spellcasting Ability for the Cantrip.",
+        "grants": [
+            "Religion Proficiency",
+            "Cantrip: Sacred Flame"
+        ],
+        "how_to_learn": {
+            "classes": [
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 1
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 6
+                },
+                {
+                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
+                    "name": "Ranger",
+                    "level": 10
+                }
+            ],
+            "subclasses": [],
+            "races": [],
+            "subraces": []
+        }
+    }
+]

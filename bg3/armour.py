@@ -1,28 +1,25 @@
-from uuid import UUID
+from uuid import UUID, uuid5
 
-from pydantic import BaseModel
+from pydantic import BaseModel, SerializerFunctionWrapHandler, computed_field, model_serializer
+
+ARMOUR_TYPE_UUID_NAMESPACE = UUID("79f6ff8f-b514-4d41-af4c-60a788077ab0")
 
 
-class ArmourProficiency(BaseModel):
-    id: UUID
+class ArmourType(BaseModel):
     name: str
 
-    def __eq__(self, other: object) -> bool:
-        if not isinstance(other, ArmourProficiency):
-            raise NotImplementedError
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def id(self) -> UUID:
+        return uuid5(ARMOUR_TYPE_UUID_NAMESPACE, self.name)
 
-        return self.id == other.id
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        return {"id": self.id, **nxt(self)}
 
 
-light_armour_proficiency = ArmourProficiency(
-    id="58d8d229-a98a-43b9-aab6-39116849465c", name="Light Armour Proficiency"
-)
-medium_armour_proficiency = ArmourProficiency(
-    id="067f812b-102f-4c69-8083-281c435dee78", name="Medium Armour Proficiency"
-)
-heavy_armour_proficiency = ArmourProficiency(
-    id="b1ffe177-ec53-4eb6-82fc-09fe9d93cc41", name="Heavy Armour Proficiency"
-)
-shield_proficiency = ArmourProficiency(
-    id="ef889bfd-18db-443b-8dd8-34ebc46875d3", name="Shield Proficiency"
-)
+LIGHT_ARMOUR = ArmourType(name="Light Armour")
+MEDIUM_ARMOUR = ArmourType(name="Medium Armour")
+HEAVY_ARMOUR = ArmourType(name="Heavy Armour")
+SHIELD = ArmourType(name="Shield")
