@@ -5,12 +5,7 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from .armour import (
-    ArmourProficiency,
-    heavy_armour_proficiency,
-    medium_armour_proficiency,
-    shield_proficiency,
-)
+from .armour import HEAVY_ARMOUR, MEDIUM_ARMOUR, SHIELD, ArmourType
 from .cantrip import (
     Cantrip,
     light,
@@ -26,7 +21,7 @@ from .feature import Feature
 from .fighting_style import DUELLING, TWO_WEAPON_FIGHTING, FightingStyle
 from .proficiency import Proficiencies
 from .spell import Spell
-from .weapon import martial_weapon_proficiencies, scimitar_proficiency
+from .weapon import MARTIAL_WEAPONS, SCIMITAR
 
 
 class CantripChoice(BaseModel):
@@ -54,7 +49,7 @@ class Subclass(BaseModel):
     fighting_style: Optional[List[FightingStyle]] = None
     class_resources: Optional[ClassResources] = None
     proficiencies: Optional[Proficiencies] = None
-    armour_proficiencies: Optional[List[ArmourProficiency]] = None
+    armour_proficiencies: Optional[List[ArmourType]] = None
     choices: Optional[Choices] = None
 
     def __eq__(self, other: object) -> bool:
@@ -78,18 +73,13 @@ college_of_lore = Subclass(
 college_of_valour = Subclass(
     id="df14418a-a4ef-4e79-80ed-1b932238c9d6",
     name="College of Valour",
-    proficiencies=Proficiencies(
-        armours=[medium_armour_proficiency, shield_proficiency],
-        weapons=martial_weapon_proficiencies,
-    ),
+    proficiencies=Proficiencies(armours=[MEDIUM_ARMOUR, SHIELD], weapons=MARTIAL_WEAPONS),
 )
 college_of_swords = Subclass(
     id="ebfbf46b-d0eb-42dc-8328-e6eb9bc4e6f8",
     name="College of Swords",
     fighting_style=[DUELLING, TWO_WEAPON_FIGHTING],
-    proficiencies=Proficiencies(
-        armours=[medium_armour_proficiency], weapons=[scimitar_proficiency]
-    ),
+    proficiencies=Proficiencies(armours=[MEDIUM_ARMOUR], weapons=[SCIMITAR]),
 )
 
 # Cleric subclasses
@@ -97,7 +87,7 @@ life_domain = Subclass(
     id="dd0b071b-d34f-4c2a-a6ff-cdb81e7a5c3d",
     name="Life",
     features=[Feature(name="Disciple of Life")],
-    proficiencies=Proficiencies(armour_proficiencies=[heavy_armour_proficiency]),
+    proficiencies=Proficiencies(armour_proficiencies=[HEAVY_ARMOUR]),
 )
 light_domain = Subclass(
     id="5ec6eefa-9ecf-4495-b598-04839e3b7c98",
@@ -119,7 +109,7 @@ nature_domain = Subclass(
     id="0e17411c-b4b0-4bd3-9cd2-6507a03fda48",
     name="Nature",
     features=[Feature(name="Acolyte of Nature")],
-    proficiencies=Proficiencies(armour_proficiencies=[heavy_armour_proficiency]),
+    proficiencies=Proficiencies(armour_proficiencies=[HEAVY_ARMOUR]),
     choices=Choices(
         cantrips=CantripChoice(
             number=1,
@@ -131,13 +121,13 @@ tempest_domain = Subclass(
     id="71b5b70c-2b7c-49c4-a778-3f8c240b8365",
     name="Tempest",
     features=[Feature(name="Wrath of the Storm")],
-    proficiencies=Proficiencies(armour_proficiencies=[heavy_armour_proficiency]),
+    proficiencies=Proficiencies(armour_proficiencies=[HEAVY_ARMOUR]),
 )
 war_domain = Subclass(
     id="bd97f295-2ab2-4ac9-a228-b540310e6c0e",
     name="War",
     features=[Feature(name="War Priest")],
-    proficiencies=Proficiencies(armour_proficiencies=[heavy_armour_proficiency]),
+    proficiencies=Proficiencies(armour_proficiencies=[HEAVY_ARMOUR]),
 )
 
 # Fighter subclasses

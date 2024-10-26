@@ -14,12 +14,7 @@ from fastapi import FastAPI, Path, Request, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, computed_field
 
-from .armour import (
-    heavy_armour_proficiency,
-    light_armour_proficiency,
-    medium_armour_proficiency,
-    shield_proficiency,
-)
+from .armour import HEAVY_ARMOUR, LIGHT_ARMOUR, MEDIUM_ARMOUR, SHIELD
 from .cantrip import bard_cantrips, cleric_cantrips
 from .characteristic import Characteristic
 from .class_action import (
@@ -72,23 +67,23 @@ from .subclass import (
     wildheart,
 )
 from .weapon import (
-    club_proficiency,
-    dagger_proficiency,
-    flail_proficiency,
-    hand_crossbow_proficiency,
-    javelin_proficiency,
-    light_crossbow_proficiency,
-    longsword_proficiency,
-    mace_proficiency,
-    martial_weapon_proficiencies,
-    morningstar_proficiency,
-    quarterstaff_proficiency,
-    rapier_proficiency,
-    scimitar_proficiency,
-    shortsword_proficiency,
-    sickle_proficiency,
-    simple_weapon_proficiencies,
-    spear_proficiency,
+    CLUB,
+    DAGGER,
+    FLAIL,
+    HAND_CROSSBOW,
+    JAVELIN,
+    LIGHT_CROSSBOW,
+    LONGSWORD,
+    MACE,
+    MARTIAL_WEAPONS,
+    MORNINGSTAR,
+    QUARTERSTAFF,
+    RAPIER,
+    SCIMITAR,
+    SHORTSWORD,
+    SICKLE,
+    SIMPLE_WEAPONS,
+    SPEAR,
 )
 
 logging.basicConfig(
@@ -217,8 +212,8 @@ def classes(
     if class_name == Class.BARBARIAN:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency, medium_armour_proficiency, shield_proficiency],
-                weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
+                armours=[LIGHT_ARMOUR, MEDIUM_ARMOUR, SHIELD],
+                weapons=SIMPLE_WEAPONS + MARTIAL_WEAPONS,
                 saving_throws=[Characteristic.STRENGTH, Characteristic.CONSTITUTION],
             )
         elif level == 1:
@@ -252,14 +247,8 @@ def classes(
     if class_name == Class.BARD:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency],
-                weapons=[
-                    *simple_weapon_proficiencies,
-                    hand_crossbow_proficiency,
-                    rapier_proficiency,
-                    longsword_proficiency,
-                    shortsword_proficiency,
-                ],
+                armours=[LIGHT_ARMOUR],
+                weapons=SIMPLE_WEAPONS + [HAND_CROSSBOW, RAPIER, LONGSWORD, SHORTSWORD],
                 saving_throws=[Characteristic.DEXTERITY, Characteristic.CHARISMA],
             )
         elif level == 1:
@@ -278,8 +267,8 @@ def classes(
     if class_name == Class.CLERIC:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency, medium_armour_proficiency, shield_proficiency],
-                weapons=[*simple_weapon_proficiencies, flail_proficiency, morningstar_proficiency],
+                armours=[LIGHT_ARMOUR, MEDIUM_ARMOUR, SHIELD],
+                weapons=SIMPLE_WEAPONS + [FLAIL, MORNINGSTAR],
                 saving_throws=[Characteristic.WISDOM, Characteristic.CHARISMA],
             )
         elif level == 1:
@@ -319,17 +308,8 @@ def classes(
     if class_name == Class.DRUID:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency, medium_armour_proficiency, shield_proficiency],
-                weapons=[
-                    club_proficiency,
-                    dagger_proficiency,
-                    javelin_proficiency,
-                    mace_proficiency,
-                    quarterstaff_proficiency,
-                    scimitar_proficiency,
-                    sickle_proficiency,
-                    spear_proficiency,
-                ],
+                armours=[LIGHT_ARMOUR, MEDIUM_ARMOUR, SHIELD],
+                weapons=[CLUB, DAGGER, JAVELIN, MACE, QUARTERSTAFF, SCIMITAR, SICKLE, SPEAR],
                 saving_throws=[Characteristic.WISDOM, Characteristic.INTELLIGENCE],
             )
 
@@ -337,12 +317,12 @@ def classes(
         if level == 0:
             result.proficiencies = Proficiencies(
                 armours=[
-                    light_armour_proficiency,
-                    medium_armour_proficiency,
-                    heavy_armour_proficiency,
-                    shield_proficiency,
+                    LIGHT_ARMOUR,
+                    MEDIUM_ARMOUR,
+                    HEAVY_ARMOUR,
+                    SHIELD,
                 ],
-                weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
+                weapons=SIMPLE_WEAPONS + MARTIAL_WEAPONS,
                 saving_throws=[Characteristic.STRENGTH, Characteristic.CONSTITUTION],
             )
         elif level == 1:
@@ -394,7 +374,7 @@ def classes(
         if level == 0:
             result.proficiencies = Proficiencies(
                 armours=[],
-                weapons=[*simple_weapon_proficiencies, shortsword_proficiency],
+                weapons=SIMPLE_WEAPONS + [SHORTSWORD],
                 saving_throws=[Characteristic.STRENGTH, Characteristic.DEXTERITY],
             )
 
@@ -402,34 +382,28 @@ def classes(
         if level == 0:
             result.proficiencies = Proficiencies(
                 armours=[
-                    light_armour_proficiency,
-                    medium_armour_proficiency,
-                    heavy_armour_proficiency,
-                    shield_proficiency,
+                    LIGHT_ARMOUR,
+                    MEDIUM_ARMOUR,
+                    HEAVY_ARMOUR,
+                    SHIELD,
                 ],
-                weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
+                weapons=SIMPLE_WEAPONS + MARTIAL_WEAPONS,
                 saving_throws=[Characteristic.WISDOM, Characteristic.CHARISMA],
             )
 
     if class_name == Class.RANGER:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency, medium_armour_proficiency],
-                weapons=[*simple_weapon_proficiencies, *martial_weapon_proficiencies],
+                armours=[LIGHT_ARMOUR, MEDIUM_ARMOUR],
+                weapons=SIMPLE_WEAPONS + MARTIAL_WEAPONS,
                 saving_throws=[Characteristic.STRENGTH, Characteristic.DEXTERITY],
             )
 
     if class_name == Class.ROGUE:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency],
-                weapons=[
-                    *simple_weapon_proficiencies,
-                    hand_crossbow_proficiency,
-                    longsword_proficiency,
-                    rapier_proficiency,
-                    shortsword_proficiency,
-                ],
+                armours=[LIGHT_ARMOUR],
+                weapons=SIMPLE_WEAPONS + [HAND_CROSSBOW, LONGSWORD, RAPIER, SHORTSWORD],
                 saving_throws=[Characteristic.DEXTERITY, Characteristic.INTELLIGENCE],
             )
 
@@ -437,15 +411,15 @@ def classes(
         if level == 0:
             result.proficiencies = Proficiencies(
                 armours=[],
-                weapons=[dagger_proficiency, quarterstaff_proficiency, light_crossbow_proficiency],
+                weapons=[DAGGER, QUARTERSTAFF, LIGHT_CROSSBOW],
                 saving_throws=[Characteristic.CHARISMA, Characteristic.CONSTITUTION],
             )
 
     if class_name == Class.WARLOCK:
         if level == 0:
             result.proficiencies = Proficiencies(
-                armours=[light_armour_proficiency],
-                weapons=[*simple_weapon_proficiencies],
+                armours=[LIGHT_ARMOUR],
+                weapons=SIMPLE_WEAPONS,
                 saving_throws=[Characteristic.WISDOM, Characteristic.CHARISMA],
             )
 
@@ -453,7 +427,7 @@ def classes(
         if level == 0:
             result.proficiencies = Proficiencies(
                 armours=[],
-                weapons=[dagger_proficiency, quarterstaff_proficiency, light_crossbow_proficiency],
+                weapons=[DAGGER, QUARTERSTAFF, LIGHT_CROSSBOW],
                 saving_throws=[Characteristic.INTELLIGENCE, Characteristic.WISDOM],
             )
 
