@@ -5,29 +5,7 @@
         "description": "Gain Proficiency in Investigation. Creatures you hit with Ensnaring Strike (either ranged or melee) have Disadvantage on their Saving Throw.",
         "grants": [
             "Investigation Proficiency"
-        ],
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        ]
     },
     {
         "id": "642efb28-d81e-5474-b52d-31bf6fa8c6b4",
@@ -36,29 +14,7 @@
         "grants": [
             "Arcana Proficiency",
             "Protection from Evil and Good, Recharge on long rest."
-        ],
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        ]
     },
     {
         "id": "421b00de-d163-589f-a6ab-d8c3bfee87e7",
@@ -67,29 +23,7 @@
         "grants": [
             "Arcana Proficiency",
             "Cantrip: True Strike"
-        ],
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        ]
     },
     {
         "id": "9f65ef0c-b9cd-571e-8f2b-dd2325713222",
@@ -98,29 +32,7 @@
         "grants": [
             "Heavy armour Proficiency",
             "History Proficiency"
-        ],
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        ]
     },
     {
         "id": "6f87aeba-a663-5ebc-b8f1-503ca00bdfb0",
@@ -129,28 +41,6 @@
         "grants": [
             "Religion Proficiency",
             "Cantrip: Sacred Flame"
-        ],
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        ]
     }
 ]

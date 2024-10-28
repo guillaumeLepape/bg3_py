@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import Iterator, List
 from uuid import UUID, uuid5
 
 from pydantic import (
@@ -10,9 +10,6 @@ from pydantic import (
     model_serializer,
 )
 
-from .classes import Class
-from .spell_new import ClassLevel, HowToLearn
-
 FAVOURED_ENEMY_UUID_NAMESPACE = UUID("d05f8f8e-ecf9-45f3-94f6-0b2e44152e3e")
 
 
@@ -20,8 +17,6 @@ class FavouredEnemy(BaseModel):
     name: str
     description: str
     grants: List[str]
-
-    how_to_learn: HowToLearn
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -34,18 +29,6 @@ class FavouredEnemy(BaseModel):
         return {"id": self.id, **nxt(self)}
 
 
-HOW_TO_LEARN_FAVOURED_ENEMY = HowToLearn(
-    classes=[
-        ClassLevel(name=Class.RANGER, level=1),
-        ClassLevel(name=Class.RANGER, level=6),
-        ClassLevel(name=Class.RANGER, level=10),
-    ],
-    subclasses=[],
-    races=[],
-    subraces=[],
-)
-
-
 BOUNTY_HUNTER = FavouredEnemy(
     name="Bounty Hunter",
     description=(
@@ -53,7 +36,6 @@ BOUNTY_HUNTER = FavouredEnemy(
         "or melee) have Disadvantage on their Saving Throw."
     ),
     grants=["Investigation Proficiency"],
-    how_to_learn=HOW_TO_LEARN_FAVOURED_ENEMY,
 )
 
 
@@ -65,7 +47,6 @@ KEEPER_OF_THE_VEIL = FavouredEnemy(
         "fiends, and undead."
     ),
     grants=["Arcana Proficiency", "Protection from Evil and Good, Recharge on long rest."],
-    how_to_learn=HOW_TO_LEARN_FAVOURED_ENEMY,
 )
 
 MAGE_BREAKER = FavouredEnemy(
@@ -76,7 +57,6 @@ MAGE_BREAKER = FavouredEnemy(
         "Wisdom is your Spellcasting Ability for this spell."
     ),
     grants=["Arcana Proficiency", "Cantrip: True Strike"],
-    how_to_learn=HOW_TO_LEARN_FAVOURED_ENEMY,
 )
 
 RANGER_KNIGHT = FavouredEnemy(
@@ -86,7 +66,6 @@ RANGER_KNIGHT = FavouredEnemy(
         "Proficiency with History and Proficiency with Heavy Armour."
     ),
     grants=["Heavy armour Proficiency", "History Proficiency"],
-    how_to_learn=HOW_TO_LEARN_FAVOURED_ENEMY,
 )
 
 SANCTIFIED_STALKER = FavouredEnemy(
@@ -97,15 +76,20 @@ SANCTIFIED_STALKER = FavouredEnemy(
         "Ability for the Cantrip."
     ),
     grants=["Religion Proficiency", "Cantrip: Sacred Flame"],
-    how_to_learn=HOW_TO_LEARN_FAVOURED_ENEMY,
 )
 
 
 class FavouredEnemies(RootModel):
     root: List[FavouredEnemy]
 
+    def __getitem__(self, index: int) -> FavouredEnemy:
+        return self.root[index]
 
-favoured_enemies = FavouredEnemies(
+    def __iter__(self) -> Iterator[FavouredEnemy]:  # type: ignore[override]
+        return iter(self.root)
+
+
+FAVOURED_ENEMIES = FavouredEnemies(
     root=[
         BOUNTY_HUNTER,
         KEEPER_OF_THE_VEIL,
@@ -117,5 +101,5 @@ favoured_enemies = FavouredEnemies(
 
 if __name__ == "__main__":
     (Path(__file__).parent / "cli" / "favoured_enemies.json").write_text(
-        favoured_enemies.model_dump_json(indent=4, exclude_none=True) + "\n"
+        FAVOURED_ENEMIES.model_dump_json(indent=4, exclude_none=True) + "\n"
     )

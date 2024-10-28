@@ -956,7 +956,15 @@
                         "name": "Ranger",
                         "level": 1,
                         "via": {
-                            "favoured_enemy": "Sanctified Stalker"
+                            "favoured_enemy": {
+                                "id": "6f87aeba-a663-5ebc-b8f1-503ca00bdfb0",
+                                "name": "Sanctified Stalker",
+                                "description": "You swore to hunt the enemies of a holy or druidic order. Gain Proficiency with Religion and the Sacred Flame Cantrip, which deals 1d8 Radiant damage. Wisdom is your Spellcasting Ability for the Cantrip.",
+                                "grants": [
+                                    "Religion Proficiency",
+                                    "Cantrip: Sacred Flame"
+                                ]
+                            }
                         }
                     },
                     {
@@ -2591,7 +2599,12 @@
                         "name": "Ranger",
                         "level": 1,
                         "via": {
-                            "natural_explorer": "Beast Tamer"
+                            "natural_explorer": {
+                                "id": "611aaa17-34ac-505b-a711-f6fdf2897398",
+                                "name": "Beast Tamer",
+                                "description": "Find Familiar as a ritual.",
+                                "grants": "Cast Find Familiar once per short rest"
+                            }
                         }
                     },
                     {

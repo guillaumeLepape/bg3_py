@@ -12,7 +12,7 @@ from pydantic import (
 )
 
 from .classes import Class, SubClass
-from .spell_new import ClassLevel, HowToLearn, SubclassLevel
+from .levelling import ClassLevel, HowToLearn, SubclassLevel
 
 FIGHTING_STYLE_UUID_NAMESPACE = UUID("0becb2f3-a09d-42ac-9508-1f7331c7bad2")
 
