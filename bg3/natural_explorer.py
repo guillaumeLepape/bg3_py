@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import Iterator, List
 from uuid import UUID, uuid5
 
 from pydantic import (
@@ -10,9 +10,6 @@ from pydantic import (
     model_serializer,
 )
 
-from .classes import Class
-from .spell_new import ClassLevel, HowToLearn
-
 NATURAL_EXPLORER_UUID_NAMESPACE = UUID("d05f8f8e-ecf9-45f3-94f6-0b2e44152e3e")
 
 
@@ -20,8 +17,6 @@ class NaturalExplorer(BaseModel):
     name: str
     description: str
     grants: str
-
-    how_to_learn: HowToLearn
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -34,23 +29,10 @@ class NaturalExplorer(BaseModel):
         return {"id": self.id, **nxt(self)}
 
 
-HOW_TO_LEARN_NATURAL_EXPLORER = HowToLearn(
-    classes=[
-        ClassLevel(name=Class.RANGER, level=1),
-        ClassLevel(name=Class.RANGER, level=6),
-        ClassLevel(name=Class.RANGER, level=10),
-    ],
-    subclasses=[],
-    races=[],
-    subraces=[],
-)
-
-
 BEAST_TAMER = NaturalExplorer(
     name="Beast Tamer",
     description="Find Familiar as a ritual.",
     grants="Cast Find Familiar once per short rest",
-    how_to_learn=HOW_TO_LEARN_NATURAL_EXPLORER,
 )
 
 
@@ -60,7 +42,6 @@ URBAN_TRACKER = NaturalExplorer(
         "An expert at navigating the wild within the city, you gain Sleight of Hand Proficiency."
     ),
     grants="Sleight of Hand Proficiency",
-    how_to_learn=HOW_TO_LEARN_NATURAL_EXPLORER,
 )
 
 WASTELAND_WANDERER_COLD = NaturalExplorer(
@@ -70,7 +51,6 @@ WASTELAND_WANDERER_COLD = NaturalExplorer(
         "taking only half damage from it."
     ),
     grants="Cold Resistance",
-    how_to_learn=HOW_TO_LEARN_NATURAL_EXPLORER,
 )
 
 WASTELAND_WANDERER_FIRE = NaturalExplorer(
@@ -80,7 +60,6 @@ WASTELAND_WANDERER_FIRE = NaturalExplorer(
         "taking only half damage from it."
     ),
     grants="Fire Resistance",
-    how_to_learn=HOW_TO_LEARN_NATURAL_EXPLORER,
 )
 
 WASTELAND_WANDERER_POISON = NaturalExplorer(
@@ -90,15 +69,20 @@ WASTELAND_WANDERER_POISON = NaturalExplorer(
         "taking only half damage from it."
     ),
     grants="Poison Resistance",
-    how_to_learn=HOW_TO_LEARN_NATURAL_EXPLORER,
 )
 
 
 class NaturalExplorers(RootModel):
     root: List[NaturalExplorer]
 
+    def __getitem__(self, index: int) -> NaturalExplorer:
+        return self.root[index]
 
-natural_explorers = NaturalExplorers(
+    def __iter__(self) -> Iterator[NaturalExplorer]:  # type: ignore[override]
+        return iter(self.root)
+
+
+NATURAL_EXPLORERS = NaturalExplorers(
     root=[
         BEAST_TAMER,
         URBAN_TRACKER,
@@ -110,5 +94,5 @@ natural_explorers = NaturalExplorers(
 
 if __name__ == "__main__":
     (Path(__file__).parent / "cli" / "natural_explorers.json").write_text(
-        natural_explorers.model_dump_json(indent=4, exclude_none=True) + "\n"
+        NATURAL_EXPLORERS.model_dump_json(indent=4, exclude_none=True) + "\n"
     )

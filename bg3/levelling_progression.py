@@ -3,6 +3,7 @@ from typing import Callable, Dict, List, Tuple, Union
 from pydantic import BaseModel, ConfigDict
 
 from .classes import Class, SubClass
+from .favoured_enemy import FAVOURED_ENEMIES, FavouredEnemy
 from .fighting_style import (
     ARCHERY,
     DEFENCE,
@@ -333,4 +334,14 @@ FIGHTING_STYLE_KNOWN_AT_LEVELS: Dict[Union[Class, SubClass], FightingStyleToChoo
     Class.RANGER: FightingStyleToChoose(
         level=2, choices=[ARCHERY, DEFENCE, DUELLING, TWO_WEAPON_FIGHTING]
     ),
+}
+
+
+class FavouredEnemyToChoose(BaseModel):
+    level: List[int]
+    choices: List[FavouredEnemy]
+
+
+FAVOURED_ENEMY_KNOWN_AT_LEVELS: Dict[Union[Class], FavouredEnemyToChoose] = {
+    Class.RANGER: FavouredEnemyToChoose(level=[1, 6, 10], choices=FAVOURED_ENEMIES),
 }

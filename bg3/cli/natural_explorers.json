@@ -3,140 +3,30 @@
         "id": "611aaa17-34ac-505b-a711-f6fdf2897398",
         "name": "Beast Tamer",
         "description": "Find Familiar as a ritual.",
-        "grants": "Cast Find Familiar once per short rest",
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        "grants": "Cast Find Familiar once per short rest"
     },
     {
         "id": "d0094e6c-a834-5fd6-b3f0-da2410b325ac",
         "name": "Urban Tracker",
         "description": "An expert at navigating the wild within the city, you gain Sleight of Hand Proficiency.",
-        "grants": "Sleight of Hand Proficiency",
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        "grants": "Sleight of Hand Proficiency"
     },
     {
         "id": "39b9bd61-2215-5c98-9f67-0630e8a494cf",
         "name": "Wasteland Wanderer: Cold",
         "description": "You have spent endless days surviving desolate tundras. Gain resistance to Cold damage, taking only half damage from it.",
-        "grants": "Cold Resistance",
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        "grants": "Cold Resistance"
     },
     {
         "id": "3f52d5eb-83c9-53b9-ba1b-4e4474a76f72",
         "name": "Wasteland Wanderer: Fire",
         "description": "You have spent endless days surviving forbidding deserts. Gain resistance to Fire damage, taking only half damage from it.",
-        "grants": "Fire Resistance",
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        "grants": "Fire Resistance"
     },
     {
         "id": "69c66c97-a779-521b-a3e6-d4d37224073b",
         "name": "Wasteland Wanderer: Poison",
         "description": "You have spent endless days surviving fetid swamps. Gain resistance to Poison damage, taking only half damage from it.",
-        "grants": "Poison Resistance",
-        "how_to_learn": {
-            "classes": [
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 1
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 6
-                },
-                {
-                    "id": "8e3ea792-2a0c-5f5b-b3ed-f8e769bbaedf",
-                    "name": "Ranger",
-                    "level": 10
-                }
-            ],
-            "subclasses": [],
-            "races": [],
-            "subraces": []
-        }
+        "grants": "Poison Resistance"
     }
 ]

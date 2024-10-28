@@ -11,27 +11,22 @@ from bs4 import BeautifulSoup
 from bg3.characteristic import TRIGRAM_TO_CHARACTERISTIC, Characteristic, trigram_to_characteristic
 from bg3.classes import CLASS_TO_SUBCLASSES, Class, SubClass
 from bg3.cost import ACTION, BONUS_ACTION, REACTION, Cost, spell_slot
-from bg3.races import Race, SubRace
-from bg3.spell_new import (
+from bg3.favoured_enemy import FAVOURED_ENEMIES
+from bg3.levelling import (
     DRACONIC_ANCESTRY_TO_DAMAGE_TYPE,
-    Cantrip,
-    CantripProperties,
     ClassLevel,
-    FavouredEnemy,
     HowToLearn,
     LandCircle,
-    NaturalExplorer,
     PactBoon,
     RaceLevel,
-    SchoolOfMagic,
-    Spell,
-    SpellProperties,
-    Spells,
     SubclassLevel,
     SubRaceLevel,
     Via,
     WildShape,
 )
+from bg3.natural_explorer import NATURAL_EXPLORERS
+from bg3.races import Race, SubRace
+from bg3.spell_new import Cantrip, CantripProperties, SchoolOfMagic, Spell, SpellProperties, Spells
 
 BASE_URL = "https://bg3.wiki"
 
@@ -113,7 +108,7 @@ def find_details(properties: Any) -> List[str]:
         if dt.text == "Details":
             return [dd.text.rstrip().lstrip() for dd in dt.find_next_siblings("dd")]
 
-    raise ValueError(f"Not details found: {properties}")
+    return []
 
 
 def find_upcast(soup: BeautifulSoup) -> bool:
@@ -193,14 +188,14 @@ def parse_via(
 
     # Ranger : Natural Explorer
     if class_or_subclass == Class.RANGER:
-        for natural_explorer in NaturalExplorer:
-            if natural_explorer.value.lower() in raw_via.lower():
+        for natural_explorer in NATURAL_EXPLORERS:
+            if natural_explorer.name.lower() in raw_via.lower():
                 return Via(natural_explorer=natural_explorer)
 
     # Ranger : Favoured Enemy
     if class_or_subclass == Class.RANGER:
-        for favoured_enemy in FavouredEnemy:
-            if favoured_enemy.value.lower() in raw_via.lower():
+        for favoured_enemy in FAVOURED_ENEMIES:
+            if favoured_enemy.name.lower() in raw_via.lower():
                 return Via(favoured_enemy=favoured_enemy)
 
     # Wizard : School of Conjuration
