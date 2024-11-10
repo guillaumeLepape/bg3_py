@@ -10,6 +10,7 @@ from pydantic import (
     model_serializer,
 )
 
+from .background import Background, background_uuid
 from .classes import Class, SubClass, class_uuid, subclass_uuid
 from .favoured_enemy import FavouredEnemy
 from .natural_explorer import NaturalExplorer
@@ -161,10 +162,28 @@ class SubRaceLevel(BaseModel):
         return {"id": self.id, **nxt(self)}
 
 
+class BackgroundLevel(BaseModel):
+    name: Background
+    level: int
+
+    model_config = ConfigDict(extra="forbid")
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def id(self) -> UUID:
+        return background_uuid(self.name)
+
+    # Custom serializer to ensure 'id' comes first
+    @model_serializer(mode="wrap")
+    def custom_serialize(self, nxt: SerializerFunctionWrapHandler) -> dict:
+        return {"id": self.id, **nxt(self)}
+
+
 class HowToLearn(BaseModel):
     classes: List[ClassLevel]
     subclasses: List[SubclassLevel]
     races: List[RaceLevel]
     subraces: List[SubRaceLevel]
+    backgrounds: List[BackgroundLevel]
 
     model_config = ConfigDict(extra="forbid")

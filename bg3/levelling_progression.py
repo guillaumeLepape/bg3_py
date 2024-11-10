@@ -2,8 +2,17 @@ from typing import Callable, Dict, List, Tuple, Union
 
 from pydantic import BaseModel, ConfigDict
 
+from .background import Background
 from .classes import Class, SubClass
-from .favoured_enemy import FAVOURED_ENEMIES, FavouredEnemy
+from .favoured_enemy import (
+    BOUNTY_HUNTER,
+    FAVOURED_ENEMIES,
+    KEEPER_OF_THE_VEIL,
+    MAGE_BREAKER,
+    RANGER_KNIGHT,
+    SANCTIFIED_STALKER,
+    FavouredEnemy,
+)
 from .fighting_style import (
     ARCHERY,
     DEFENCE,
@@ -13,6 +22,19 @@ from .fighting_style import (
     TWO_WEAPON_FIGHTING,
     FightingStyle,
 )
+from .levelling import (
+    BackgroundLevel,
+    ClassLevel,
+    HowToLearn,
+    Race,
+    RaceLevel,
+    SubclassLevel,
+    SubRaceLevel,
+    Via,
+)
+from .natural_explorer import URBAN_TRACKER
+from .races import SubRace
+from .skill import Skill
 from .spell_new import SchoolOfMagic, Spell
 
 
@@ -344,4 +366,323 @@ class FavouredEnemyToChoose(BaseModel):
 
 FAVOURED_ENEMY_KNOWN_AT_LEVELS: Dict[Union[Class], FavouredEnemyToChoose] = {
     Class.RANGER: FavouredEnemyToChoose(level=[1, 6, 10], choices=FAVOURED_ENEMIES),
+}
+
+
+SKILL_PROFICIENCY: Dict[Skill, HowToLearn] = {
+    Skill.ATHLETICS: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARBARIAN, level=1),
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.MONK, level=1),
+            ClassLevel(name=Class.PALADIN, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.OUTLANDER, level=1),
+            BackgroundLevel(name=Background.SOLDIER, level=1),
+        ],
+    ),
+    Skill.ACROBATICS: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.MONK, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[BackgroundLevel(name=Background.ENTERTAINER, level=1)],
+    ),
+    Skill.SLEIGHT_OF_HAND: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.RANGER, level=1, via=Via(natural_explorer=URBAN_TRACKER)),
+            ClassLevel(name=Class.ROGUE, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.CHARLATAN, level=1),
+            BackgroundLevel(name=Background.URCHIN, level=1),
+        ],
+    ),
+    Skill.STEALTH: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.MONK, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[
+            SubRaceLevel(name=SubRace.WOOD_ELF, level=1),
+            SubRaceLevel(name=SubRace.WOOD_HALF_ELF, level=1),
+        ],
+        backgrounds=[
+            BackgroundLevel(name=Background.CRIMINAL, level=1),
+            BackgroundLevel(name=Background.URCHIN, level=1),
+        ],
+    ),
+    Skill.ARCANA: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.RANGER, level=1, via=Via(favoured_enemy=KEEPER_OF_THE_VEIL)),
+            ClassLevel(name=Class.RANGER, level=1, via=Via(favoured_enemy=MAGE_BREAKER)),
+            ClassLevel(name=Class.SORCERER, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+            ClassLevel(name=Class.WIZARD, level=1),
+        ],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[],
+        backgrounds=[BackgroundLevel(name=Background.SAGE, level=1)],
+    ),
+    Skill.HISTORY: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.CLERIC, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.RANGER, level=1, via=Via(favoured_enemy=RANGER_KNIGHT)),
+            ClassLevel(name=Class.MONK, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+            ClassLevel(name=Class.WIZARD, level=1),
+        ],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[SubRaceLevel(name=SubRace.ROCK_GNOME, level=1)],
+        backgrounds=[
+            BackgroundLevel(name=Background.NOBLE, level=1),
+            BackgroundLevel(name=Background.SAGE, level=1),
+        ],
+    ),
+    Skill.INVESTIGATION: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+            ClassLevel(name=Class.RANGER, level=1, via=Via(favoured_enemy=BOUNTY_HUNTER)),
+            ClassLevel(name=Class.ROGUE, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+            ClassLevel(name=Class.WIZARD, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[],
+    ),
+    Skill.NATURE: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARBARIAN, level=1),
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+        ],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[],
+        backgrounds=[],
+    ),
+    Skill.RELIGION: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.CLERIC, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.MONK, level=1),
+            ClassLevel(name=Class.PALADIN, level=1),
+            ClassLevel(name=Class.RANGER, level=1, via=Via(favoured_enemy=SANCTIFIED_STALKER)),
+            ClassLevel(name=Class.SORCERER, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+            ClassLevel(name=Class.WIZARD, level=1),
+        ],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[],
+        backgrounds=[BackgroundLevel(name=Background.ACOLYTE, level=1)],
+    ),
+    Skill.ANIMAL_HANDLING: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARBARIAN, level=1),
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[BackgroundLevel(name=Background.FOLK_HERO, level=1)],
+    ),
+    Skill.INSIGHT: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.CLERIC, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.MONK, level=1),
+            ClassLevel(name=Class.PALADIN, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+            ClassLevel(name=Class.SORCERER, level=1),
+            ClassLevel(name=Class.WIZARD, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.ACOLYTE, level=1),
+            BackgroundLevel(name=Background.GUILD_ARTISAN, level=1),
+        ],
+    ),
+    Skill.MEDICINE: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.CLERIC, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.PALADIN, level=1),
+            ClassLevel(name=Class.WIZARD, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[BackgroundLevel(name=Background.HAUNTED_ONE, level=1)],
+    ),
+    Skill.PERCEPTION: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARBARIAN, level=1),
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+        ],
+        subclasses=[],
+        races=[RaceLevel(name=Race.ELF, level=1), RaceLevel(name=Race.DROW, level=1)],
+        subraces=[],
+        backgrounds=[],
+    ),
+    Skill.SURVIVAL: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARBARIAN, level=1),
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.DRUID, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.RANGER, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.FOLK_HERO, level=1),
+            BackgroundLevel(name=Background.OUTLANDER, level=1),
+        ],
+    ),
+    Skill.DECEPTION: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+            ClassLevel(name=Class.SORCERER, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.CHARLATAN, level=1),
+            BackgroundLevel(name=Background.CRIMINAL, level=1),
+        ],
+    ),
+    Skill.INTIMIDATION: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARBARIAN, level=1),
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.FIGHTER, level=1),
+            ClassLevel(name=Class.PALADIN, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+            ClassLevel(name=Class.SORCERER, level=1),
+            ClassLevel(name=Class.WARLOCK, level=1),
+        ],
+        subclasses=[],
+        races=[RaceLevel(name=Race.HALF_ORC, level=1)],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.HAUNTED_ONE, level=1),
+            BackgroundLevel(name=Background.SOLDIER, level=1),
+        ],
+    ),
+    Skill.PERFORMANCE: HowToLearn(
+        classes=[ClassLevel(name=Class.BARD, level=1), ClassLevel(name=Class.ROGUE, level=1)],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[BackgroundLevel(name=Background.ENTERTAINER, level=1)],
+    ),
+    Skill.PERSUASION: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.BARD, level=1),
+            ClassLevel(name=Class.CLERIC, level=1),
+            ClassLevel(name=Class.PALADIN, level=1),
+            ClassLevel(name=Class.ROGUE, level=1),
+            ClassLevel(name=Class.SORCERER, level=1),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[
+            BackgroundLevel(name=Background.GUILD_ARTISAN, level=1),
+            BackgroundLevel(name=Background.NOBLE, level=1),
+        ],
+    ),
+}
+
+
+SKILL_EXPERTISE = {
+    Skill.ARCANA: HowToLearn(
+        classes=[],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[],
+        backgrounds=[],
+    ),
+    Skill.HISTORY: HowToLearn(
+        classes=[],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[SubRaceLevel(name=SubRace.ROCK_GNOME, level=1)],
+        backgrounds=[],
+    ),
+    Skill.NATURE: HowToLearn(
+        classes=[],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[],
+        backgrounds=[],
+    ),
+    Skill.RELIGION: HowToLearn(
+        classes=[],
+        subclasses=[SubclassLevel(name=SubClass.KNOWLEDGE_DOMAIN, level=1)],
+        races=[],
+        subraces=[],
+        backgrounds=[],
+    ),
+    None: HowToLearn(
+        classes=[
+            ClassLevel(name=Class.ROGUE, level=1),
+            ClassLevel(name=Class.BARD, level=3),
+            ClassLevel(name=Class.ROGUE, level=6),
+            ClassLevel(name=Class.BARD, level=10),
+        ],
+        subclasses=[],
+        races=[],
+        subraces=[],
+        backgrounds=[],
+    ),
 }
