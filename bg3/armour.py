@@ -51,6 +51,7 @@ LIGHT_ARMOUR = ArmourType(
         subclasses=[],
         races=[RaceLevel(name=Race.HALF_ELF, level=1), RaceLevel(name=Race.HUMAN, level=1)],
         subraces=[],
+        backgrounds=[],
     ),
 )
 MEDIUM_ARMOUR = ArmourType(
@@ -70,6 +71,7 @@ MEDIUM_ARMOUR = ArmourType(
         ],
         races=[RaceLevel(name=Race.GITHYANKI, level=1)],
         subraces=[SubRaceLevel(name=SubRace.SHIELD_DWARF, level=1)],
+        backgrounds=[],
     ),
 )
 HEAVY_ARMOUR = ArmourType(
@@ -88,6 +90,7 @@ HEAVY_ARMOUR = ArmourType(
         ],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 SHIELD = ArmourType(
@@ -104,5 +107,6 @@ SHIELD = ArmourType(
         subclasses=[SubclassLevel(name=SubClass.COLLEGE_OF_VALOR, level=3)],
         races=[RaceLevel(name=Race.HALF_ELF, level=1), RaceLevel(name=Race.HUMAN, level=1)],
         subraces=[],
+        backgrounds=[],
     ),
 )

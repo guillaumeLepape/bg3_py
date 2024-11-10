@@ -44,6 +44,7 @@ ARCHERY = FightingStyle(
         subclasses=[SubclassLevel(name=SubClass.CHAMPION, level=10)],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 
@@ -59,6 +60,7 @@ DEFENCE = FightingStyle(
         subclasses=[SubclassLevel(name=SubClass.CHAMPION, level=10)],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 
@@ -81,6 +83,7 @@ DUELLING = FightingStyle(
         ],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 
@@ -100,6 +103,7 @@ GREAT_WEAPON_FIGHTING = FightingStyle(
         ],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 
@@ -119,6 +123,7 @@ PROTECTION = FightingStyle(
         ],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 
@@ -139,6 +144,7 @@ TWO_WEAPON_FIGHTING = FightingStyle(
         ],
         races=[],
         subraces=[],
+        backgrounds=[],
     ),
 )
 

@@ -435,7 +435,7 @@ async def add_cantrip_details_from_page(client: httpx.AsyncClient, url: str, nam
             saving_throw=saving_throw,
         ),
         how_to_learn=HowToLearn(
-            classes=classes, subclasses=subclasses, races=races, subraces=subraces
+            classes=classes, subclasses=subclasses, races=races, subraces=subraces, backgrounds=[]
         ),
     )
 
@@ -509,7 +509,7 @@ async def add_spell_details_from_page(
         ),
         can_upcast=find_upcast(soup),
         how_to_learn=HowToLearn(
-            classes=classes, subclasses=subclasses, races=races, subraces=subraces
+            classes=classes, subclasses=subclasses, races=races, subraces=subraces, backgrounds=[]
         ),
     )
 
